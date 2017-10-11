@@ -15,23 +15,18 @@
 
 
 <script>
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 import ECharts from 'vue-echarts'
-import option from '@/data/map.js'
+import map from '@/data/map.js'
 import ImapHeader from '@/components/Layout/Header'
 import chinaMap from '@/data/china.json'
 import worldMap from '@/data/world.json'
-
-// mapState({
-//   mapType: state => state.map.mapType,
-//   countAlias: 'mapType'
-// })
 
 export default {
   name: "Chart",
   data() {
     return {
-      option: option,
+      option: {},
       selectMapType: '',
       showChart: false,
       mapList: [{
@@ -40,10 +35,13 @@ export default {
         }, {
           value: 'world',
           label: '世界地图'
-      }],
-      swichMapCount: 0
+      }]
     }
   },
+  computed: mapState({
+    excelData: state => state.excel.excelData[0],
+    countAlias: 'excelData'
+  }),
   components: {
     ImapHeader,
     chart: ECharts
@@ -53,7 +51,7 @@ export default {
       if(this.selectMapType === '')
         this.$Message.error('请选择地图类型')
       else {
-        this.swichMapCount > 0 && this.$Message.info('点击右上角还原按钮')
+        this.option = map.getMapData(this.excelData)
         this.selectMapType === 'china' ?  ECharts.registerMap('china', chinaMap) : ECharts.registerMap('china', worldMap)
         this.showChart = true
         this.swichMapCount ++

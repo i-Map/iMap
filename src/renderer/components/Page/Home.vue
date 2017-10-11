@@ -92,8 +92,6 @@ import url from '@/server/url.js'
             data: formData
           }).then((data) => {
             if(data.code === 0) {
-              console.log(data)
-              // this.setMapType(this.selectChartL)
               this.setExcelData(data.data)
               this.$Spin.hide()
               this.$router.push({
