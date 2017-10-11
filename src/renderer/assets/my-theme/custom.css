@@ -1,0 +1,69 @@
+.ivu-menu-horizontal {
+  height: 51px;
+  line-height: 51px;
+}
+.ivu-menu-horizontal .ivu-menu-item,
+.ivu-menu-horizontal .ivu-menu-submenu {
+  float: right;
+}
+.ivu-select-dropdown {
+  background-color: #262529;
+}
+.ivu-menu-horizontal {
+  height: 51px;
+  line-height: 51px;
+}
+.ivu-menu-horizontal .ivu-menu-item,
+.ivu-menu-horizontal .ivu-menu-submenu {
+  float: right;
+}
+.ivu-select-dropdown {
+  background-color: #262529;
+}
+.ivu-input {
+  border: none;
+}
+.ivu-input {
+  margin-bottom: 12px;
+}
+.ivu-input:hover {
+  border: none;
+  background-color: #131414;
+}
+.ivu-input:focus {
+  background: #131414;
+}
+.ivu-icon.ivu-icon-android-map {
+  margin-right: 10px;
+}
+.ivu-input-group {
+  margin-bottom: 12px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.ivu-input-group-append {
+  background-color: #1E1E21;
+}
+.ivu-select-selection {
+  border: 0;
+  background-color: #222222;
+}
+.ivu-select-single .ivu-select-selection {
+  border: 0;
+  background-color: #222222;
+}
+.ivu-spin-large .ivu-spin-dot {
+  width: 55px;
+  height: 55px;
+}
+.ivu-spin-dot {
+  position: fixed;
+  top: 42%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+  background-color: #ff3300;
+}
+.ivu-spin-fix {
+  opacity: .9;
+  background-color: #222222;
+}

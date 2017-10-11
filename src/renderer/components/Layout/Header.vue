@@ -1,0 +1,79 @@
+<template lang="html">
+  <Menu mode="horizontal" theme="primary" active-name="1" @on-select="onSelect">
+    <span class="header-userName">{{ userAccount }}</span>
+    <Submenu name="3">
+        <template slot="title">
+            <Icon type="ios-person"></Icon>
+            个人中心
+        </template>
+        <MenuGroup title="使用">
+            <MenuItem name="3-1">我的项目</MenuItem>
+            <MenuItem name="3-2">帮助文档</MenuItem>            
+        </MenuGroup>
+        <MenuGroup title="操作">
+            <MenuItem name="3-2">设置</MenuItem>
+            <MenuItem name="3-3">登出</MenuItem>
+        </MenuGroup>
+    </Submenu>
+    <MenuItem name="2">
+        <Icon type="stats-bars"></Icon>
+        地图库
+    </MenuItem>
+    <MenuItem name="1">
+        <Icon type="plus"></Icon>
+        新地图
+    </MenuItem>
+  </Menu>
+</template>
+
+
+<script>
+import storage from 'store'
+import { mapState } from 'vuex'
+export default {
+  name: "Header",
+  data() {
+    return {
+    }
+  },
+  computed: mapState({
+    userAccount: state => state.userInfo.userInfo.email || storage.get('userInfo').email,
+    countAlias: 'userAccount'
+  }),
+  methods: {
+    onSelect(value) {
+      if(value === '1')
+        this.$router.push({ name: 'Home' })
+      if(value === '3-3') {
+        this.$Message.success('登出成功,再见👋')
+        storage.clearAll()
+        this.$router.push({
+          name: 'Login'
+        })
+      }
+    }
+  }
+}
+</script>
+
+
+<style lang="less" scoped>
+@import '../../assets/my-theme/custom.less';
+  .header-userName {
+    padding: 0 20px;
+    font-weight: 600;
+    cursor: default;
+  }
+  // .ivu-menu-horizontal {
+  //   height: 51px;
+  //   line-height: 51px;
+  // }
+
+  // .ivu-menu-horizontal .ivu-menu-item, .ivu-menu-horizontal .ivu-menu-submenu {
+  //   float: right;
+  // }
+
+  // .ivu-select-dropdown {
+  //   background-color: #262529;
+  // }
+</style>
