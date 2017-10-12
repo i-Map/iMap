@@ -27,6 +27,7 @@ export default {
 	 * @param {Object} obj 
 	 */
 	getMapData({...obj}) {
+		console.log(obj)
 		data = []
 		geoCoordMap = []
 		let geoModel = []

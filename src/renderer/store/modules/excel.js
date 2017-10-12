@@ -10,6 +10,10 @@ const mutations = {
   // 设置excelData
   [types.SET_EXCEL_DATA] (state, data) {
     state.excelData = data
+  },
+  // 更新excelData
+  [types.UPDATE_EXCEL_DATA] (state, data) {
+    state.excelData.data.push(data)
   }
 }
 

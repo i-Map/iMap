@@ -23,3 +23,11 @@ export const setMapType = ({ commit }, data) => {
 export const setExcelData = ({ commit }, data) => {
     commit(types.SET_EXCEL_DATA, data)
 }
+
+/**
+ * 更新Excel数据
+ * @param {Array} data 
+ */
+export const updateExcelData = ({ commit }, data) => {
+    commit(types.UPDATE_EXCEL_DATA, data)
+}

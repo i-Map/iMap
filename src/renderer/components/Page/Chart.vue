@@ -8,8 +8,29 @@
       <a href="javascript:;" class="next-btn" @click="makeupChart">
         生成地图
       </a>
+      <a v-if="showEditMapBtn" href="javascript:;" class="edit-btn" @click="editMap">
+        编辑地图
+      </a>
     </div>
     <chart v-if="showChart" :options="option"></chart>
+    <Modal v-model="editMapModal" width="280">
+      <div style="text-align:center">
+        <a href="javascript:;" class="point-btn addPoint-btn" @click="addPoint">
+          添加地点
+        </a><br>
+        <a href="javascript:;" class="point-btn editPoint-btn" @click="editPoint">
+          编辑地点
+        </a><br>
+        <a href="javascript:;" class="point-btn delPoint-btn" @click="delPoint">
+          删除坐标
+        </a>
+      </div>
+      <div slot="footer">
+      </div>
+    </Modal>
+    <imap-addpointmodal v-model="showAddPointModal"></imap-addpointmodal>
+    <imap-editpointmodal v-model="showEditPointModal"></imap-editpointmodal>
+    <imap-delpointmodal v-model="showDelPointModal"></imap-delpointmodal>    
   </div>
 </template>
 
@@ -17,12 +38,16 @@
 <script>
 import _ from 'lodash'
 import { mapState } from 'vuex'
+import { mapActions } from 'vuex'
 import storage from 'store'
 import ajax from '@/server/ajax.js'
 import url from '@/server/url.js'
 import ECharts from 'vue-echarts'
 import map from '@/data/map.js'
 import ImapHeader from '@/components/Layout/Header'
+import ImapAddpointmodal from '@/components/Ui/AddPointModal'
+import ImapEditpointmodal from '@/components/Ui/EditPointModal'
+import ImapDelpointmodal from '@/components/Ui/DelPointModal'
 import chinaMap from '@/data/china.json'
 import worldMap from '@/data/world.json'
 
@@ -39,29 +64,40 @@ export default {
         }, {
           value: 'world',
           label: '世界地图'
-      }]
+      }],
+      showEditMapBtn: false,
+      editMapModal: false,
+      showAddPointModal: false,
+      showEditPointModal: false,
+      showDelPointModal: false
     }
   },
   computed: mapState({
-    excelData: state => state.excel.excelData[0],
+    excelData: state => state.excel.excelData,
     countAlias: 'excelData',
     userId: state => state.userInfo.userInfo.objectId || storage.get('userId'),
     countAlias: 'userId'
   }),
   components: {
     ImapHeader,
+    ImapAddpointmodal, 
+    ImapEditpointmodal,
+    ImapDelpointmodal,
     chart: ECharts
   },
   methods: {
+    ...mapActions({
+      setExcelData: 'setExcelData'
+    }),
     makeupChart() {
       if(this.selectMapType === '')
         this.$Message.error('请选择地图类型')
       else {
-        if(this.excelData === '') {
-          this.option = map.getMapData(this.excelData)
-          this.option = map.getMapData(this.excelData)            
+        if(this.excelData.data !== undefined) {
+          this.option = map.getMapData(this.excelData)          
           this.selectMapType === 'china' ?  ECharts.registerMap('china', chinaMap) : ECharts.registerMap('china', worldMap)
           this.showChart = true
+          this.showEditMapBtn = true
           let updateMapDate = new Date(_.now()).toLocaleString()
           ajax.post({
             url: url.ASYNC_UPLOAD,
@@ -86,6 +122,8 @@ export default {
             this.option = map.getMapData(data.mapData)            
             this.selectMapType === 'china' ?  ECharts.registerMap('china', chinaMap) : ECharts.registerMap('china', worldMap)
             this.showChart = true
+            this.setExcelData(data.mapData)
+            this.showEditMapBtn = true
             let updateMapDate = new Date(_.now()).toLocaleString()
             ajax.post({
               url: url.ASYNC_UPLOAD,
@@ -100,6 +138,18 @@ export default {
           })          
         }
       }
+    },
+    editMap() {
+      this.editMapModal = true
+    },
+    addPoint() {
+      this.showAddPointModal = true
+    },
+    editPoint() {
+      this.showEditPointModal = true
+    },
+    delPoint() {
+      this.showDelPointModal = true
     }
   }
 }
@@ -126,7 +176,7 @@ export default {
     padding: 4px 10px;    
   }
 
-  .upload-xls, .makeChart-btn, .next-btn {
+  .upload-xls, .makeChart-btn, .next-btn, .edit-btn, .point-btn {
     padding: 4px 40px;
     position: relative;
     display: inline-block;
@@ -154,5 +204,19 @@ export default {
       text-decoration: none;
       cursor: pointer;      
     }
+  }
+
+  .edit-btn {
+    float: right;
+    margin-right: 10px;
+    padding: 4px 20px;
+  }
+
+  .point-btn {
+    margin-bottom: 12px;
+  }
+
+  .addPoint-btn {
+    margin-top: 40px;
   }
 </style>

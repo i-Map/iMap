@@ -72,16 +72,4 @@ export default {
     font-weight: 600;
     cursor: default;
   }
-  // .ivu-menu-horizontal {
-  //   height: 51px;
-  //   line-height: 51px;
-  // }
-
-  // .ivu-menu-horizontal .ivu-menu-item, .ivu-menu-horizontal .ivu-menu-submenu {
-  //   float: right;
-  // }
-
-  // .ivu-select-dropdown {
-  //   background-color: #262529;
-  // }
 </style>

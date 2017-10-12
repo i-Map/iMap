@@ -8,12 +8,19 @@
         <a href="javascript:;" class="edit-btn" @click="edit">
           查看
         </a>
-        <a href="javascript:;" class="del-btn">
+        <a href="javascript:;" class="del-btn" @click="delModal = true">
           删除
         </a>
       </div>
       <h2 v-else class="myProject-tips">暂无数据</h2>
     </section>
+    <Modal
+      v-model="delModal"
+      title="警告"
+      @on-ok="delMyProject"
+      @on-cancel="cancleDelModal">
+      <p>确定要删除已有项目么？</p>
+    </Modal>
   </div>
 </template>
 
@@ -29,7 +36,8 @@ export default {
   data() {
     return {
       activeName: '3-1',
-      updateDate: ''
+      updateDate: '',
+      delModal: false
     }
   },
   components: {
@@ -48,11 +56,33 @@ export default {
       this.updateDate = data.updateMapDate
     })
   },
+  computed: mapState({
+    userId: state => state.userInfo.userInfo.objectId || storage.get('userId'),
+    countAlias: 'userId'
+  }),
   methods: {
     edit() {
       this.$router.push({
         name: 'Chart'
       })
+    },
+    delMyProject() {
+      this.delModal = false
+      this.$Spin.show()      
+      ajax.post({
+        url: url.DELMAPDATA,
+        data: {
+          userId: this.userId || storage.get('userId')
+        }
+      }).then(data => {
+        this.$Spin.hide()                                
+        this.$router.push({
+          name: 'Home'
+        })
+      })
+    },
+    cancleDelModal() {
+      this.delModal = false      
     }
   }
 }

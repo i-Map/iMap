@@ -81,7 +81,7 @@ import url from '@/server/url.js'
             }).then((data) => {
               this.$Spin.hide()              
               if(data.code === 0) {
-                this.setExcelData(data.data)
+                this.setExcelData(data.data[0])
                 this.$router.push({
                   name: 'Chart'
                 })           
