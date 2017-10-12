@@ -6,9 +6,6 @@
         <div class="panel-l panel-item">
           <Icon class="icon-red" type="document-text"></Icon>
           <p class="title">导入Excel</p>
-          <!-- <Select v-model="selectChartL" style="width:200px">
-            <Option v-for="item in chartList" :value="item.value" :key="item.value">{{ item.label }}</Option>
-          </Select><br> -->
           <a href="javascript:;" class="upload-xls">
             上传文件
             <input type="file" name="resource" @change="addFile($event)">
@@ -20,9 +17,6 @@
         <div class="panel-r panel-item">
           <Icon class="icon-red" type="android-map"></Icon>
           <p class="title">自定义地图</p>
-          <!-- <Select v-model="selectChartR" style="width:200px">
-            <Option v-for="item in chartList" :value="item.value" :key="item.value">{{ item.label }}</Option>
-          </Select><br> -->
           <a href="javascript:;" class="makeChart-btn">
             开始制作
           </a>
@@ -50,16 +44,7 @@ import url from '@/server/url.js'
   export default {
     name: "Home",
     data() {
-      return {
-        // chartList: [{
-        //     value: 'china',
-        //     label: '中国地图'
-        //   }, {
-        //     value: 'world',
-        //     label: '世界地图'
-        // }],
-        // selectChartL: '',
-        // selectChartR: '',        
+      return {     
         file: '',
         ExcelMakeLoading: false
       }
@@ -81,24 +66,28 @@ import url from '@/server/url.js'
       excelToChart() {
         if(this.file === '')
           this.$Message.error('请先上传文件')
-        // else if(this.selectChartL === '')
-        //   this.$Message.error('请选择地图类型')
         else {
-          this.$Spin.show()
-          let formData = new FormData()
-          formData.append('file', this.file)
-          ajax.post({
-            url: url.RESOLVEEXCEL,
-            data: formData
-          }).then((data) => {
-            if(data.code === 0) {
-              this.setExcelData(data.data)
-              this.$Spin.hide()
-              this.$router.push({
-                name: 'Chart'
-              })           
-            }
-          })
+          let nameArray = this.file.name.split('.')
+          let fileType = nameArray[nameArray.length - 1]
+          if(fileType !== 'xlsx' && fileType !== 'xls') {
+            this.$Message.error('请上传xlsx格式的文件')            
+          } else {
+            this.$Spin.show()
+            let formData = new FormData()
+            formData.append('file', this.file)
+            ajax.post({
+              url: url.RESOLVEEXCEL,
+              data: formData
+            }).then((data) => {
+              if(data.code === 0) {
+                this.setExcelData(data.data)
+                this.$Spin.hide()
+                this.$router.push({
+                  name: 'Chart'
+                })           
+              }
+            })
+          }      
         }
       }
     }

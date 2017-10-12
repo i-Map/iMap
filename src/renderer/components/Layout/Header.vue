@@ -1,5 +1,5 @@
 <template lang="html">
-  <Menu mode="horizontal" theme="primary" active-name="1" @on-select="onSelect">
+  <Menu mode="horizontal" theme="primary" :active-name="activeName" @on-select="onSelect">
     <span class="header-userName">{{ userAccount }}</span>
     <Submenu name="3">
         <template slot="title">
@@ -32,6 +32,12 @@ import storage from 'store'
 import { mapState } from 'vuex'
 export default {
   name: "Header",
+  props: {
+    activeName: {
+      type: String,
+      default: '1'
+    }
+  },
   data() {
     return {
     }
@@ -44,6 +50,8 @@ export default {
     onSelect(value) {
       if(value === '1')
         this.$router.push({ name: 'Home' })
+      if(value === '3-1')
+        this.$router.push({ name: 'MyProject'})
       if(value === '3-3') {
         this.$Message.success('登出成功,再见👋')
         storage.clearAll()

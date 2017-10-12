@@ -15,7 +15,11 @@
 
 
 <script>
+import _ from 'lodash'
 import { mapState } from 'vuex'
+import storage from 'store'
+import ajax from '@/server/ajax.js'
+import url from '@/server/url.js'
 import ECharts from 'vue-echarts'
 import map from '@/data/map.js'
 import ImapHeader from '@/components/Layout/Header'
@@ -40,7 +44,9 @@ export default {
   },
   computed: mapState({
     excelData: state => state.excel.excelData[0],
-    countAlias: 'excelData'
+    countAlias: 'excelData',
+    userId: state => state.userInfo.userInfo.objectId || storage.get('userId'),
+    countAlias: 'userId'
   }),
   components: {
     ImapHeader,
@@ -54,7 +60,17 @@ export default {
         this.option = map.getMapData(this.excelData)
         this.selectMapType === 'china' ?  ECharts.registerMap('china', chinaMap) : ECharts.registerMap('china', worldMap)
         this.showChart = true
-        this.swichMapCount ++
+        let updateMapDate = new Date(_.now()).toLocaleString()
+        ajax.post({
+          url: url.ASYNC_UPLOAD,
+          data: {
+            userId: this.userId,
+            mapData: this.excelData,
+            updateMapDate: updateMapDate
+          }
+        }).then(data => {
+          console.log(data)
+        })
       }
     }
   }

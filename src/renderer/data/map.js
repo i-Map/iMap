@@ -14,7 +14,7 @@ const convertData = data => {
 		if(geoCoord) {
 			res.push({
 				name: data[i].name,
-				value: geoCoord.concat(data[i].value)
+				value: geoCoord.concat(data[i].value).concat(data[i].time)
 			})
 		}
 	}
@@ -33,12 +33,14 @@ export default {
 		obj.data.forEach((item, idx) => {
 			let dataModel = {
 				name: '',
-				value: 84
+				value: 84,
+				time: ''
 			}
 			geoModel.push(item[0])			
 			let itemArr = [+item[1], +item[2]]
 			geoModel.push(itemArr)				
 			dataModel.name = item[0]
+			dataModel.time = item[3]			
 			data.push(dataModel)
 		})
 		geoCoordMap = _.chunk(geoModel, 2)
@@ -71,7 +73,7 @@ export default {
 				orient: 'vertical',
 				y: 'bottom',
 				x: 'right',
-				data: ['地点'],
+				data: ['去过的地点'],
 				textStyle: {
 					color: '#fff'
 				}
@@ -95,7 +97,7 @@ export default {
 			},
 			series: [
 				{
-					name: '地点',
+					name: '去过的地点',
 					type: 'effectScatter',
 					coordinateSystem: 'geo',
 					data: convertData(data),

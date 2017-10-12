@@ -36,6 +36,10 @@ const router = new Router({
       name: 'Chart',
       component: resolve => require(['@/components/Page/Chart'], resolve)
     }, {
+      path: '/myProject',
+      name: 'MyProject',
+      component: resolve => require(['@/components/Page/MyProject'], resolve)
+    }, {
       path: '*',
       redirect: '/'
     }
