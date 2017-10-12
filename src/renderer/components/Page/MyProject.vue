@@ -5,7 +5,7 @@
       <h1 class="myProject-title">我的足迹</h1>
       <p v-if="updateDate" class="myProject-span"><span>上次更新：</span>{{ updateDate | dateFormat }}</p>
       <div v-if="updateDate">
-        <a href="javascript:;" class="edit-btn">
+        <a href="javascript:;" class="edit-btn" @click="edit">
           查看
         </a>
         <a href="javascript:;" class="del-btn">
@@ -36,15 +36,24 @@ export default {
     ImapHeader
   },
   created() {
+    this.$Spin.show()
     ajax.post({
       url: url.ASYNC_DOWNLOAD,
       data: {
         userId: this.$store.state.userInfo.userInfo.objectId || storage.get('userId')
       }
     }).then(data => {
+      this.$Spin.hide()             
       console.log(data)
       this.updateDate = data.updateMapDate
     })
+  },
+  methods: {
+    edit() {
+      this.$router.push({
+        name: 'Chart'
+      })
+    }
   }
 }
 </script>

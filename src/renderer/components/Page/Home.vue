@@ -79,9 +79,9 @@ import url from '@/server/url.js'
               url: url.RESOLVEEXCEL,
               data: formData
             }).then((data) => {
+              this.$Spin.hide()              
               if(data.code === 0) {
                 this.setExcelData(data.data)
-                this.$Spin.hide()
                 this.$router.push({
                   name: 'Chart'
                 })           

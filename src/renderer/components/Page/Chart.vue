@@ -57,20 +57,48 @@ export default {
       if(this.selectMapType === '')
         this.$Message.error('请选择地图类型')
       else {
-        this.option = map.getMapData(this.excelData)
-        this.selectMapType === 'china' ?  ECharts.registerMap('china', chinaMap) : ECharts.registerMap('china', worldMap)
-        this.showChart = true
-        let updateMapDate = new Date(_.now()).toLocaleString()
-        ajax.post({
-          url: url.ASYNC_UPLOAD,
-          data: {
-            userId: this.userId,
-            mapData: this.excelData,
-            updateMapDate: updateMapDate
-          }
-        }).then(data => {
-          console.log(data)
-        })
+        if(this.excelData === '') {
+          this.option = map.getMapData(this.excelData)
+          this.option = map.getMapData(this.excelData)            
+          this.selectMapType === 'china' ?  ECharts.registerMap('china', chinaMap) : ECharts.registerMap('china', worldMap)
+          this.showChart = true
+          let updateMapDate = new Date(_.now()).toLocaleString()
+          ajax.post({
+            url: url.ASYNC_UPLOAD,
+            data: {
+              userId: this.userId,
+              mapData: this.excelData,
+              updateMapDate: updateMapDate
+            }
+          }).then(data => {
+            console.log(data)
+          })
+        }
+        else {
+          this.$Spin.show()
+          ajax.post({
+            url: url.ASYNC_DOWNLOAD,
+            data: {
+              userId: this.userId
+            }
+          }).then(data => {
+            this.$Spin.hide()
+            this.option = map.getMapData(data.mapData)            
+            this.selectMapType === 'china' ?  ECharts.registerMap('china', chinaMap) : ECharts.registerMap('china', worldMap)
+            this.showChart = true
+            let updateMapDate = new Date(_.now()).toLocaleString()
+            ajax.post({
+              url: url.ASYNC_UPLOAD,
+              data: {
+                userId: this.userId,
+                mapData: this.excelData,
+                updateMapDate: updateMapDate
+              }
+            }).then(data => {
+              console.log(data)
+            })
+          })          
+        }
       }
     }
   }
