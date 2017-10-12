@@ -10,7 +10,12 @@ const state = {
 const mutations = {
   // 设置excelData
   [types.SET_EXCEL_DATA] (state, data) {
-    state.excelData = data
+    if(data.data)
+      state.excelData = data
+    else {
+      state.excelData.data.length = 0
+      state.excelData.data.push(data)
+    }
   },
   // 添加excelData
   [types.ADD_EXCEL_DATA] (state, data) {

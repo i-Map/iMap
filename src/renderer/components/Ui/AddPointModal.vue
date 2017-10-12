@@ -55,7 +55,8 @@ export default {
   }),
   methods: {
     ...mapActions({
-      addExcelData: 'addExcelData'
+      addExcelData: 'addExcelData',
+      setExcelData: 'setExcelData'
     }),
     addPoint() {
       if(this.model[0] === '' || this.model[1] === '' || this.model[2] === '' || this.model[3] === '')
@@ -65,7 +66,14 @@ export default {
       else {
         this.$Spin.show()
         this.showModal = false 
-        this.addExcelData(this.model)
+        if(this.$route.path === '/') {
+          this.setExcelData(this.model)
+          this.$router.push({
+            name: 'Chart'
+          })
+        }
+        else
+          this.addExcelData(this.model)
         let updateMapDate = new Date(_.now()).toLocaleString()
         ajax.post({
           url: url.ASYNC_UPLOAD,

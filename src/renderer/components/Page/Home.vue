@@ -17,7 +17,7 @@
         <div class="panel-r panel-item">
           <Icon class="icon-red" type="android-map"></Icon>
           <p class="title">自定义地图</p>
-          <a href="javascript:;" class="makeChart-btn">
+          <a href="javascript:;" class="makeChart-btn" @click="makeUpMap">
             开始制作
           </a>
         </div>
@@ -26,18 +26,37 @@
         <Icon class="icon-yellow" type="information-circled"></Icon>
         <h3>小提示</h3>
         <p class="tip-conatiner">
-          <span> 在导入Excel之前请务必在 个人中心 - 帮助手册 查阅帮助手册，格式不对是不能生成地图的喔 </span><br>
-          <span> 你可以在图表库中找到你喜欢的款式 </span><br>          
+          <span> 开始项目之前，请务必在 个人中心 - 帮助手册 查阅帮助手册 </span><br>                    
+          <span> 在导入Excel之前请检查文件类型和内容格式，格式不对是不能生成地图的喔 </span><br>
           <span> 可以在 个人中心 - 我的项目 中找到你以往的项目 </span>
         </p>
       </div>
     </section>
+    <Modal v-model="makeUpChartModal" width="280">
+      <p slot="header" style="text-align:center">
+        <span>{{ hasProject ? '发现已有项目' : '您还未拥有项目' }}</span>
+      </p>
+      <div style="text-align:center">
+        <a href="javascript:;" class="project-btn newProject-btn" @click="newProject">
+          新建项目
+        </a><br>
+        <a v-if="hasProject" href="javascript:;" class="project-btn editProject-btn" @click="editProject">
+          编辑项目
+        </a>
+      </div>
+      <div slot="footer">
+      </div>
+    </Modal>
+    <imap-addpointmodal v-model="showAddPointModal"></imap-addpointmodal>
   </div>
 </template>
 
 
 <script>
 import ImapHeader from '@/components/Layout/Header'
+import ImapAddpointmodal from '@/components/Ui/AddPointModal'
+import storage from 'store'
+import { mapState } from 'vuex'
 import { mapActions } from 'vuex'
 import ajax from '@/server/ajax.js'
 import url from '@/server/url.js'
@@ -46,12 +65,22 @@ import url from '@/server/url.js'
     data() {
       return {     
         file: '',
-        ExcelMakeLoading: false
+        ExcelMakeLoading: false,
+        makeUpChartModal: false,
+        hasProject: false,
+        showAddPointModal: false
       }
     },
     components: {
-      ImapHeader
+      ImapHeader,
+      ImapAddpointmodal
     },
+    computed: mapState({
+      excelData: state => state.excel.excelData,
+      countAlias: 'excelData',
+      userId: state => state.userInfo.userInfo.objectId || storage.get('userId'),
+      countAlias: 'userId'
+    }),
     methods: {
       ...mapActions({
         setMapType: 'setMapType',
@@ -89,6 +118,36 @@ import url from '@/server/url.js'
             })
           }      
         }
+      },
+      makeUpMap() {
+        this.$Spin.show()
+        ajax.post({
+          url: url.ASYNC_DOWNLOAD,
+          data: {
+            userId: this.userId
+          }
+        }).then(data => {
+          console.log(data)
+          if(data.updateMapDate !== '') {
+            this.$Spin.hide()
+            this.hasProject = true            
+            this.makeUpChartModal = true 
+            this.setExcelData(data.mapData)
+          } else {
+            this.$Spin.hide()
+            this.hasProject = false          
+            this.makeUpChartModal = true           
+          }
+        })   
+      },
+      newProject() {
+        this.showAddPointModal = true
+      },
+      editProject() {
+        this.makeUpChartModal = false
+        this.$router.push({
+          name: 'Chart'
+        })
       }
     }
   }
@@ -171,7 +230,7 @@ import url from '@/server/url.js'
     }
   }
 
-  .upload-xls, .makeChart-btn, .next-btn {
+  .upload-xls, .makeChart-btn, .next-btn, .project-btn {
     margin-top: 50px;
     padding: 4px 40px;
     position: relative;
@@ -209,5 +268,13 @@ import url from '@/server/url.js'
   .next-btn {
     margin-left: 10px;
     padding: 4px 10px;    
+  }
+
+  .project-btn {
+    margin-top: 12px;
+  }
+
+  .newProject-btn {
+    margin-top: 30px;
   }
 </style>
