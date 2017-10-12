@@ -14,7 +14,7 @@
       <Input class="addPointModal-input" v-model="model[0]" placeholder="地点名称" style="width: 300px"></Input><br>
       <Input class="addPointModal-input" v-model="model[1]" placeholder="经度" style="width: 300px"></Input><br>
       <Input class="addPointModal-input" v-model="model[2]" placeholder="纬度" style="width: 300px"></Input><br>
-      <!-- <DatePicker class="addPointModal-input" v-model="model[3]" type="date" placeholder="选择日期" style="width: 300px"></DatePicker>     -->
+      <DatePicker class="addPointModal-input" @on-change="getDate($event)" type="date" placeholder="选择日期" style="width: 300px"></DatePicker>    
     </div>
   </Modal>
 </template>
@@ -74,6 +74,9 @@ export default {
     },
     cancleModal() {
       this.showModal = false
+    },
+    getDate(date) {
+      this.model[3] = date
     }
   },
   watch:{
