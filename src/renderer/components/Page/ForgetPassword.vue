@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="forgetPassword-conatiner">
-    <h1 class="forgetPassword-logo"><Icon type="pie-graph"></Icon>iMap</h1>
+    <h1 class="forgetPassword-logo"><Icon type="android-map"></Icon>iMap</h1>
     <Input icon="ios-email-outline" v-model="forgetPasswordModel.email" placeholder="请输入邮箱" style="width: 300px"></Input>   
     <Button v-if="!this.forgetPasswordLoading" class="forgetPassword-btn" type="primary" style="width: 300px" @click="forgetPassword">发送邮件</Button>
     <Button v-else class="forgetPassword-btn" type="primary" style="width: 300px" loading>邮件发送中...</Button>

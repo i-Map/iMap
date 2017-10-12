@@ -64,9 +64,6 @@ export default {
 					saveAsImage: {
 						show: true,
 						pixelRatio: 3
-					},
-					restore: {
-						show: true
 					}
 				}
 			},

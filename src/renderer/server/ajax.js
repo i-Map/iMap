@@ -2,8 +2,8 @@ import axios from 'axios'
 import { Message } from 'iview'
 axios.defaults.timeout = 1000000; //响应时间
 axios.defaults.headers.post['Content-Type'] = 'application/json' //通信格式
-// axios.defaults.baseURL = 'http://localhost:3000/' //配置接口地址
-axios.defaults.baseURL = 'https://imap.leanapp.cn' //配置接口地址
+axios.defaults.baseURL = 'http://localhost:3000/' //配置接口地址
+// axios.defaults.baseURL = 'https://imap.leanapp.cn' //配置接口地址
 
 export default {
   // POST请求

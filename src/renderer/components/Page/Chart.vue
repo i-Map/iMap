@@ -22,7 +22,7 @@
           编辑地点
         </a><br>
         <a href="javascript:;" class="point-btn delPoint-btn" @click="delPoint">
-          删除坐标
+          删除地点
         </a>
       </div>
       <div slot="footer">

@@ -1,4 +1,6 @@
 export const SET_USER_INFO = 'SET_USER_INFO'
 export const SET_MAP_TYPE = 'SET_MAP_TYPE'
 export const SET_EXCEL_DATA = 'SET_EXCEL_DATA'
-export const UPDATE_EXCEL_DATA = 'UPDATE_EXCEL_DATA'
+export const ADD_EXCEL_DATA = 'ADD_EXCEL_DATA'
+export const EDIT_EXCEL_DATA = 'EDIT_EXCEL_DATA'
+export const DEL_EXCEL_DATA = 'DEL_EXCEL_DATA'

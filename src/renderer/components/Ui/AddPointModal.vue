@@ -27,6 +27,7 @@ import { mapActions } from 'vuex'
 import storage from 'store'
 import ajax from '@/server/ajax.js'
 import url from '@/server/url.js'
+import tool from '@/tool/index.js'
 export default {
   name: "AddPointModal",
   props: {
@@ -54,23 +55,29 @@ export default {
   }),
   methods: {
     ...mapActions({
-      updateExcelData: 'updateExcelData'
+      addExcelData: 'addExcelData'
     }),
     addPoint() {
-      this.$Spin.show()
-      this.showModal = false 
-      this.updateExcelData(this.model)
-      let updateMapDate = new Date(_.now()).toLocaleString()
-      ajax.post({
-        url: url.ASYNC_UPLOAD,
-        data: {
-          userId: this.userId,
-          mapData: this.excelData,
-          updateMapDate: updateMapDate
-        }
-      }).then(data => {
-        this.$Spin.hide()
-      })
+      if(this.model[0] === '' || this.model[1] === '' || this.model[2] === '' || this.model[3] === '')
+        this.$Message.error('输入不能为空')
+      else if(!tool.judgeNum(this.model[1]) || !tool.judgeNum(this.model[2]))
+        this.$Message.error('经纬度请输入数字格式')
+      else {
+        this.$Spin.show()
+        this.showModal = false 
+        this.addExcelData(this.model)
+        let updateMapDate = new Date(_.now()).toLocaleString()
+        ajax.post({
+          url: url.ASYNC_UPLOAD,
+          data: {
+            userId: this.userId,
+            mapData: this.excelData,
+            updateMapDate: updateMapDate
+          }
+        }).then(data => {
+          this.$Spin.hide()
+        })
+      }
     },
     cancleModal() {
       this.showModal = false
