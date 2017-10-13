@@ -11,9 +11,11 @@
       <span>添加地点</span>
     </p>
     <div style="text-align:center">
-      <Input class="addPointModal-input" v-model="model[0]" placeholder="地点名称" style="width: 300px"></Input><br>
-      <Input class="addPointModal-input" v-model="model[1]" placeholder="经度" style="width: 300px"></Input><br>
-      <Input class="addPointModal-input" v-model="model[2]" placeholder="纬度" style="width: 300px"></Input><br>
+      <Input class="addPointModal-input" v-model="model[0]" placeholder="地点名称" style="width: 300px" @on-blur="getLocation"></Input><br>
+      <Input v-if="!hasGetLocation" class="addPointModal-input" v-model="model[1]" placeholder="经度" style="margin-top:18px;width: 300px"></Input><br>
+      <Input v-if="hasGetLocation" class="addPointModal-input" :value="model[1]" style="width: 300px"></Input><br>      
+      <Input v-if="!hasGetLocation" class="addPointModal-input" v-model="model[2]" placeholder="纬度" style="width: 300px"></Input><br>
+      <Input v-if="hasGetLocation" class="addPointModal-input" :value="model[2]" style="margin-bottom:18px;width: 300px"></Input><br>      
       <DatePicker class="addPointModal-input" @on-change="getDate($event)" type="date" placeholder="选择日期" style="width: 300px"></DatePicker>
     </div>
   </Modal>
@@ -44,20 +46,43 @@ export default {
         '',
         ''
       ],
-      showModal: false
+      showModal: false,
+      hasGetLocation: false
     }
   },
-  computed: mapState({
-    excelData: state => state.excel.excelData,
-    countAlias: 'excelData',
-    userId: state => state.userInfo.userInfo.objectId || storage.get('userId'),
-    countAlias: 'userId'
-  }),
+  computed: {
+    ...mapState({
+      excelData: state => state.excel.excelData,
+      countAlias: 'excelData',
+      userId: state => state.userInfo.userInfo.objectId || storage.get('userId'),
+      countAlias: 'userId'
+    }),
+  },
   methods: {
     ...mapActions({
       addExcelData: 'addExcelData',
       setExcelData: 'setExcelData'
     }),
+    getLocation() {
+      if(this.model[0] !== '') {
+        this.$Spin.show()
+        ajax.get({
+          url: url.GETLOCATION_CHINA,
+          data: {
+            address: this.model[0],
+            output: 'json',
+            ak: 'O9WWqYCWQ0d0N1KI85Blg7X2fSBsxOAs',
+            callback: 'showLocation'
+          }
+        }).then(data => {
+          console.log(data)
+          this.model[1] = data.result.location.lng
+          this.model[2] = data.result.location.lat
+          this.hasGetLocation = true
+          this.$Spin.hide()
+        })
+      }
+    },
     addPoint() {
       if(this.model[0] === '' || this.model[1] === '' || this.model[2] === '' || this.model[3] === '')
         this.$Message.error('输入不能为空')
@@ -74,6 +99,8 @@ export default {
         }
         else
           this.addExcelData(this.model)
+        this.model = ['', '', '', '']  
+        this.hasGetLocation = false      
         let updateMapDate = new Date(_.now()).toLocaleString()
         ajax.post({
           url: url.ASYNC_UPLOAD,
@@ -113,7 +140,7 @@ export default {
 
 <style lang="less" scoped>
 @import '../../assets/my-theme/custom.less';
-  .addPointModal-input {
-    margin-bottom: 12px;
+  .addPointModal-input_1 {
+    margin-bottom: 18px;
   }
 </style>
