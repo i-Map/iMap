@@ -8,6 +8,8 @@
 
 一款基于electron和Echarts的旅行地图生成器
 
+![https://github.com/HuangXiZhou/iMap/releases](https://img.shields.io/badge/releases-beta%20V2-blue.svg)
+
 ## 下载
 [MacOS](https://github.com/HuangXiZhou/iMap/releases/download/0.0.2-beta/iMap-0.0.2-beta-mac.zip)
 
