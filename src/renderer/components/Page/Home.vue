@@ -127,7 +127,7 @@ import url from '@/server/url.js'
             userId: this.userId
           }
         }).then(data => {
-          if(data.updateMapDate !== '') {
+          if(data.updateMapDate) {
             this.$Spin.hide()
             this.hasProject = true            
             this.makeUpChartModal = true 

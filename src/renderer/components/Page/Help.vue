@@ -9,7 +9,7 @@
         <h2 class="ml-10">导入Excel</h2>
           <p class="content ml-10">
             在导入Excel操作中，请务必注意格式，请按以下图片格式为标准
-            <img :src="help_1" alt="Excel格式">
+            <img :src="help_1" alt="Excel格式"><br>
             数据说明：<br>
             第一列：城市名称（示例：南昌）<br>
             第二列：地点经度（示例：115.910125）<br>
