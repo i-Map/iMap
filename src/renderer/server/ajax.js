@@ -43,5 +43,26 @@ export default {
         }
       })
     })
+  },
+  // GET请求
+  get({...obj}) {
+    return new Promise((resolve,reject) => {
+      axios.get(obj.url).then(data => {
+        if(data.data.code === 0){
+          resolve(data.data)
+        } else if (data.data.code === 1) {
+          Message.warning(data.data.msg)
+          resolve(data.data)
+        } else if (data.data.code === 2) {
+          Message.error(data.data.msg)
+          resolve(data.data)
+        } else {
+          Message.error(data.data.msg)
+          resolve(data.data)
+        }
+      }).catch(data => {
+        reject(data)
+      })
+    })
   }
 }

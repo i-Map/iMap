@@ -56,9 +56,13 @@ export default {
         this.$router.push({ name: 'MyProject'})
       if(value === '3-2')
         this.$router.push({ name: 'Help' })
+      if(value === '3-3')
+        this.$router.push({ name: 'Update' })
       if(value === '3-4') {
         this.$Message.success('登出成功,再见👋')
-        storage.clearAll()
+        storage.remove('userInfo')
+        storage.remove('userId')
+        storage.remove('accessToken')
         this.$router.push({
           name: 'Login'
         })
