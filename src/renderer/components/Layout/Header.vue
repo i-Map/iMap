@@ -11,7 +11,6 @@
             <MenuItem name="3-2">帮助文档</MenuItem>            
         </MenuGroup>
         <MenuGroup title="操作">
-            <MenuItem name="3-2">设置</MenuItem>
             <MenuItem name="3-3">登出</MenuItem>
         </MenuGroup>
     </Submenu>
@@ -50,8 +49,12 @@ export default {
     onSelect(value) {
       if(value === '1')
         this.$router.push({ name: 'Home' })
+      if(value === '2')
+        this.$router.push({ name: 'Map' })
       if(value === '3-1')
         this.$router.push({ name: 'MyProject'})
+      if(value === '3-2')
+        this.$router.push({ name: 'Help' })
       if(value === '3-3') {
         this.$Message.success('登出成功,再见👋')
         storage.clearAll()

@@ -106,9 +106,7 @@ export default {
               mapData: this.excelData,
               updateMapDate: updateMapDate
             }
-          }).then(data => {
-            console.log(data)
-          })
+          }).then(data => {})
         }
         else {
           this.$Spin.show()
@@ -132,9 +130,7 @@ export default {
                 mapData: this.excelData,
                 updateMapDate: updateMapDate
               }
-            }).then(data => {
-              console.log(data)
-            })
+            }).then(data => {})
           })          
         }
       }

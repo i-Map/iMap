@@ -52,7 +52,6 @@ export default {
       }
     }).then(data => {
       this.$Spin.hide()             
-      console.log(data)
       this.updateDate = data.updateMapDate
     })
   },

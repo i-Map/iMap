@@ -16,7 +16,7 @@
         </div>
         <div class="panel-r panel-item">
           <Icon class="icon-red" type="android-map"></Icon>
-          <p class="title">自定义地图</p>
+          <p class="title">自定义输入</p>
           <a href="javascript:;" class="makeChart-btn" @click="makeUpMap">
             开始制作
           </a>
@@ -127,7 +127,6 @@ import url from '@/server/url.js'
             userId: this.userId
           }
         }).then(data => {
-          console.log(data)
           if(data.updateMapDate !== '') {
             this.$Spin.hide()
             this.hasProject = true            
