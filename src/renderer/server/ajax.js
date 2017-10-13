@@ -4,8 +4,8 @@ import jsonp from 'jsonp'
 import qs from 'qs'
 axios.defaults.timeout = 1000000; //响应时间
 axios.defaults.headers.post['Content-Type'] = 'application/json' //通信格式
-axios.defaults.baseURL = 'http://localhost:3000/' //配置接口地址
-// axios.defaults.baseURL = 'https://imap.leanapp.cn' //配置接口地址
+// axios.defaults.baseURL = 'http://localhost:3000/' //配置接口地址
+axios.defaults.baseURL = 'https://imap.leanapp.cn' //配置接口地址
 
 export default {
   // POST请求
@@ -30,15 +30,15 @@ export default {
       })
     })
   },
-  // GET请求
-  get({...obj}) {
+  // 坐标请求(百度地图API)
+  getLocation({...obj}) {
     return new Promise((resolve, reject) => {
       jsonp(obj.url + '?' + qs.stringify(obj.data) , null,  (err, data) => {
         if (err) {
-          Message.error('请求错误')          
+          Message.error('请求错误')
         } else {
           if(data.status === 0) {
-            resolve(data)            
+            resolve(data)
           }
         }
       })

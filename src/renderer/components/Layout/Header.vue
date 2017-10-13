@@ -11,7 +11,8 @@
             <MenuItem name="3-2">帮助文档</MenuItem>
         </MenuGroup>
         <MenuGroup title="操作">
-            <MenuItem name="3-3">登出</MenuItem>
+            <MenuItem name="3-3">检查更新</MenuItem>          
+            <MenuItem name="3-4">登出</MenuItem>
         </MenuGroup>
     </Submenu>
     <MenuItem name="2">
@@ -55,7 +56,7 @@ export default {
         this.$router.push({ name: 'MyProject'})
       if(value === '3-2')
         this.$router.push({ name: 'Help' })
-      if(value === '3-3') {
+      if(value === '3-4') {
         this.$Message.success('登出成功,再见👋')
         storage.clearAll()
         this.$router.push({

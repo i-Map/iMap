@@ -26,9 +26,9 @@
         <Icon class="icon-yellow" type="information-circled"></Icon>
         <h3>小提示</h3>
         <p class="tip-conatiner">
-          <span> 开始项目之前，请务必在 个人中心 - 帮助手册 查阅帮助手册 </span><br>
+          <span> 开始项目之前，请务必查阅 个人中心 - 帮助文档 </span><br>
           <span> 在导入Excel之前请检查文件类型和内容格式，格式不对是不能生成地图的喔 </span><br>
-          <span> 可以在 个人中心 - 我的项目 中找到你以往的项目 </span>
+          <span> 可以在 个人中心 - 我的项目 中找到你的项目 </span>
         </p>
       </div>
     </section>
