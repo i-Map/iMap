@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="auth-container">
-    <router-view></router-view>  
+    <router-view></router-view>
   </div>
 </template>
 

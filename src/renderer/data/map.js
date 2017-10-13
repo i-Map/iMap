@@ -5,7 +5,7 @@ let geoCoordMap = []
 
 /**
  * 赋值函数
- * @param {Array} data 
+ * @param {Array} data
  */
 const convertData = data => {
 	let res = []
@@ -24,7 +24,7 @@ const convertData = data => {
 export default {
 	/**
 	 * 返回地图数据
-	 * @param {Object} obj 
+	 * @param {Object} obj
 	 */
 	getMapData({...obj}) {
 		data = []
@@ -37,11 +37,11 @@ export default {
 					value: 84,
 					time: ''
 				}
-				geoModel.push(item[0])			
+				geoModel.push(item[0])
 				let itemArr = [+item[1], +item[2]]
-				geoModel.push(itemArr)				
+				geoModel.push(itemArr)
 				dataModel.name = item[0]
-				dataModel.time = item[3]			
+				dataModel.time = item[3]
 				data.push(dataModel)
 			})
 			geoCoordMap = _.chunk(geoModel, 2)

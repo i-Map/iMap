@@ -8,7 +8,7 @@
         </template>
         <MenuGroup title="使用">
             <MenuItem name="3-1">我的项目</MenuItem>
-            <MenuItem name="3-2">帮助文档</MenuItem>            
+            <MenuItem name="3-2">帮助文档</MenuItem>
         </MenuGroup>
         <MenuGroup title="操作">
             <MenuItem name="3-3">登出</MenuItem>

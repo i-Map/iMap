@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <imap-header :active-name="activeName"></imap-header>    
+    <imap-header :active-name="activeName"></imap-header>
     <div class="map-container">
       <div class="item-wrapper">
         <h2>中国地图</h2>
@@ -8,8 +8,8 @@
       </div>
       <div class="item-wrapper">
         <h2>世界地图</h2>
-        <img class="map world" :src="worldMap" alt="word">            
-      </div>      
+        <img class="map world" :src="worldMap" alt="word">
+      </div>
     </div>
   </div>
 </template>
@@ -41,15 +41,15 @@ export default {
     text-align: center;
     cursor: default;
     .item-wrapper {
-      margin-top: 100px;      
+      margin-top: 100px;
       display: inline-block;
       height: 200px;
       text-align: center;
       .map {
         margin-top: 30px;
         width: 400px;
-        transition: all .3s ease-in; 
-        cursor: pointer;     
+        transition: all .3s ease-in;
+        cursor: pointer;
         &:hover {
           transform: scale(1.2);
         }

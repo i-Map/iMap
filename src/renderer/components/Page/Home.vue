@@ -26,7 +26,7 @@
         <Icon class="icon-yellow" type="information-circled"></Icon>
         <h3>小提示</h3>
         <p class="tip-conatiner">
-          <span> 开始项目之前，请务必在 个人中心 - 帮助手册 查阅帮助手册 </span><br>                    
+          <span> 开始项目之前，请务必在 个人中心 - 帮助手册 查阅帮助手册 </span><br>
           <span> 在导入Excel之前请检查文件类型和内容格式，格式不对是不能生成地图的喔 </span><br>
           <span> 可以在 个人中心 - 我的项目 中找到你以往的项目 </span>
         </p>
@@ -63,7 +63,7 @@ import url from '@/server/url.js'
   export default {
     name: "Home",
     data() {
-      return {     
+      return {
         file: '',
         ExcelMakeLoading: false,
         makeUpChartModal: false,
@@ -83,7 +83,6 @@ import url from '@/server/url.js'
     }),
     methods: {
       ...mapActions({
-        setMapType: 'setMapType',
         setExcelData: 'setExcelData'
       }),
       addFile(event) {
@@ -99,7 +98,7 @@ import url from '@/server/url.js'
           let nameArray = this.file.name.split('.')
           let fileType = nameArray[nameArray.length - 1]
           if(fileType !== 'xlsx' && fileType !== 'xls') {
-            this.$Message.error('请上传xlsx格式的文件')            
+            this.$Message.error('请上传xlsx格式的文件')
           } else {
             this.$Spin.show()
             let formData = new FormData()
@@ -108,15 +107,15 @@ import url from '@/server/url.js'
               url: url.RESOLVEEXCEL,
               data: formData
             }).then((data) => {
-              this.$Spin.hide()              
+              this.$Spin.hide()
               if(data.code === 0) {
                 this.setExcelData(data.data[0])
                 this.$router.push({
                   name: 'Chart'
-                })           
+                })
               }
             })
-          }      
+          }
         }
       },
       makeUpMap() {
@@ -129,15 +128,15 @@ import url from '@/server/url.js'
         }).then(data => {
           if(data.updateMapDate) {
             this.$Spin.hide()
-            this.hasProject = true            
-            this.makeUpChartModal = true 
+            this.hasProject = true
+            this.makeUpChartModal = true
             this.setExcelData(data.mapData)
           } else {
             this.$Spin.hide()
-            this.hasProject = false          
-            this.makeUpChartModal = true           
+            this.hasProject = false
+            this.makeUpChartModal = true
           }
-        })   
+        })
       },
       newProject() {
         this.showAddPointModal = true
@@ -195,7 +194,7 @@ import url from '@/server/url.js'
 
   .home-container--item {
     margin-bottom: 20px;
-    min-width: 940px;    
+    min-width: 940px;
     height: 200px;
     background-color: #302F33;
     .panel-item {
@@ -208,7 +207,7 @@ import url from '@/server/url.js'
       }
       .title {
         padding-top: 14px;
-        padding-bottom: 6px;        
+        padding-bottom: 6px;
         font-size: 18px;
         font-weight: 500;
       }
@@ -221,7 +220,7 @@ import url from '@/server/url.js'
     }
 
     .panel-r {
-      margin-right: 20px;      
+      margin-right: 20px;
       float: right;
       width: 420px;
       height: 100%;
@@ -251,12 +250,12 @@ import url from '@/server/url.js'
       width: 128px;
       font-size: 100px;
       opacity: 0;
-      cursor: pointer;      
+      cursor: pointer;
     }
     &:hover {
       background: #0B0C0C;
       text-decoration: none;
-      cursor: pointer;      
+      cursor: pointer;
     }
   }
 
@@ -266,7 +265,7 @@ import url from '@/server/url.js'
 
   .next-btn {
     margin-left: 10px;
-    padding: 4px 10px;    
+    padding: 4px 10px;
   }
 
   .project-btn {

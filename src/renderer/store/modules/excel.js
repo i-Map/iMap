@@ -13,6 +13,7 @@ const mutations = {
     if(data.data)
       state.excelData = data
     else {
+      state.excelData.data = []
       state.excelData.data.length = 0
       state.excelData.data.push(data)
     }
@@ -27,8 +28,8 @@ const mutations = {
       if(item[0] === data[0]) {
           item[1] = data[1]
           item[2] = data[2]
-          item[3] = data[3]  
-      } 
+          item[3] = data[3]
+      }
       if(item[1] === data[1] && item[2] === data[2]) {
         item[0] = data[0]
       }

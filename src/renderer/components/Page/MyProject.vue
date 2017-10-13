@@ -51,7 +51,7 @@ export default {
         userId: this.$store.state.userInfo.userInfo.objectId || storage.get('userId')
       }
     }).then(data => {
-      this.$Spin.hide()             
+      this.$Spin.hide()
       this.updateDate = data.updateMapDate
     })
   },
@@ -67,21 +67,21 @@ export default {
     },
     delMyProject() {
       this.delModal = false
-      this.$Spin.show()      
+      this.$Spin.show()
       ajax.post({
         url: url.DELMAPDATA,
         data: {
           userId: this.userId || storage.get('userId')
         }
       }).then(data => {
-        this.$Spin.hide()                                
+        this.$Spin.hide()
         this.$router.push({
           name: 'Home'
         })
       })
     },
     cancleDelModal() {
-      this.delModal = false      
+      this.delModal = false
     }
   }
 }
@@ -104,13 +104,13 @@ export default {
 
   .myProject-span {
     padding: 0 20px;
-    font-weight: 400; 
+    font-weight: 400;
     color: #AD4B35;
   }
 
   .myProject-tips {
     padding: 12px 20px;
-    font-weight: 300;  
+    font-weight: 300;
   }
 
   .edit-btn, .del-btn {
@@ -132,7 +132,7 @@ export default {
     &:hover {
       background: #0B0C0C;
       text-decoration: none;
-      cursor: pointer;      
+      cursor: pointer;
     }
   }
 </style>

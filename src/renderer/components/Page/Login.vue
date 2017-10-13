@@ -2,15 +2,15 @@
   <div class="login-conatiner">
     <h1 class="login-logo"><Icon type="android-map"></Icon></Icon>iMap</h1>
     <Input icon="ios-email-outline" v-model="emailLoginModel.email" placeholder="请输入邮箱" style="width: 300px"></Input>
-    <Input type="password" icon="ios-locked-outline" v-model="emailLoginModel.password" placeholder="请输入密码" style="width: 300px"></Input> 
+    <Input type="password" icon="ios-locked-outline" v-model="emailLoginModel.password" placeholder="请输入密码" style="width: 300px"></Input>
     <Button v-if="!loginLoading" class="login-btn" type="primary" style="width: 300px" @click="login">登录</Button>
     <Button v-else class="login-btn" type="primary" style="width: 300px" loading>登录中...</Button>
     <div class="login-text">
       <a @click="goForgetPassword">忘记密码？</a>
     </div>
-    <div class="login-text">    
+    <div class="login-text">
       <a @click="goRegister">注册</a>
-    </div>    
+    </div>
   </div>
 </template>
 
@@ -50,7 +50,7 @@ export default {
       if (!tool.judgeEmail(this.emailLoginModel.email))
         this.$Message.error('请输入正确邮箱')
       else if(!tool.judgePassword(this.emailLoginModel.password))
-        this.$Message.error('请输入正确密码')        
+        this.$Message.error('请输入正确密码')
       else {
         this.loginLoading = true
         ajax.post({
@@ -63,7 +63,7 @@ export default {
             storage.set('userId', data.data.userId)
             storage.set('userInfo', data.data.userInfo)
             this.setUserInfo(data.data.userInfo)
-            this.$router.push({ 
+            this.$router.push({
               name: 'Home'
             })
           }
@@ -91,17 +91,17 @@ export default {
       background-color: #1E1E21;
     }
     p {
-      padding: 10px 0;  
-      font-size: 14px; 
+      padding: 10px 0;
+      font-size: 14px;
     }
     .login-text {
       margin: 16px 0;
     }
-    a { 
-      font-size: 14px; 
+    a {
+      font-size: 14px;
       color: #C0C0C0;
-      transition: color 0.2s ease-in-out;   
-      cursor: pointer;   
+      transition: color 0.2s ease-in-out;
+      cursor: pointer;
       &:hover {
         color: #7193D9;
       }

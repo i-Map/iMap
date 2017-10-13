@@ -1,7 +1,7 @@
 <template lang="html">
-  <Modal 
-    :value="value" 
-    v-model="showModal" 
+  <Modal
+    :value="value"
+    v-model="showModal"
     :closable="false"
     @on-ok="delPoint"
     @on-cancel="cancleModal"
@@ -11,7 +11,7 @@
       <span>删除地点</span>
     </p>
     <div style="text-align:center">
-      <Input class="delPointModal-input" v-model="model[0]" placeholder="地点名称" style="width: 300px"></Input>  
+      <Input class="delPointModal-input" v-model="model[0]" placeholder="地点名称" style="width: 300px"></Input>
     </div>
   </Modal>
 </template>
@@ -38,7 +38,7 @@ export default {
       model: [
         ''
       ],
-      showModal: false      
+      showModal: false
     }
   },
   computed: mapState({
@@ -64,7 +64,7 @@ export default {
         this.$Message.error('输入不能为空')
       else {
         this.$Spin.show()
-        this.showModal = false 
+        this.showModal = false
         this.delExcelData(this.model)
         let updateMapDate = new Date(_.now()).toLocaleString()
         ajax.post({
@@ -77,7 +77,7 @@ export default {
         }).then(data => {
           this.$Spin.hide()
         })
-      }     
+      }
     },
     cancleModal() {
       this.showModal = false

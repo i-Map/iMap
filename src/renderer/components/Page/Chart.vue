@@ -30,7 +30,7 @@
     </Modal>
     <imap-addpointmodal v-model="showAddPointModal"></imap-addpointmodal>
     <imap-editpointmodal v-model="showEditPointModal"></imap-editpointmodal>
-    <imap-delpointmodal v-model="showDelPointModal"></imap-delpointmodal>    
+    <imap-delpointmodal v-model="showDelPointModal"></imap-delpointmodal>
   </div>
 </template>
 
@@ -80,7 +80,7 @@ export default {
   }),
   components: {
     ImapHeader,
-    ImapAddpointmodal, 
+    ImapAddpointmodal,
     ImapEditpointmodal,
     ImapDelpointmodal,
     chart: ECharts
@@ -94,7 +94,7 @@ export default {
         this.$Message.error('请选择地图类型')
       else {
         if(this.excelData.data !== undefined) {
-          this.option = map.getMapData(this.excelData)          
+          this.option = map.getMapData(this.excelData)
           this.selectMapType === 'china' ?  ECharts.registerMap('china', chinaMap) : ECharts.registerMap('china', worldMap)
           this.showChart = true
           this.showEditMapBtn = true
@@ -117,7 +117,7 @@ export default {
             }
           }).then(data => {
             this.$Spin.hide()
-            this.option = map.getMapData(data.mapData)            
+            this.option = map.getMapData(data.mapData)
             this.selectMapType === 'china' ?  ECharts.registerMap('china', chinaMap) : ECharts.registerMap('china', worldMap)
             this.showChart = true
             this.setExcelData(data.mapData)
@@ -131,7 +131,7 @@ export default {
                 updateMapDate: updateMapDate
               }
             }).then(data => {})
-          })          
+          })
         }
       }
     },
@@ -169,7 +169,7 @@ export default {
 
   .next-btn {
     margin-left: 10px;
-    padding: 4px 10px;    
+    padding: 4px 10px;
   }
 
   .upload-xls, .makeChart-btn, .next-btn, .edit-btn, .point-btn {
@@ -193,12 +193,12 @@ export default {
       width: 128px;
       font-size: 100px;
       opacity: 0;
-      cursor: pointer;      
+      cursor: pointer;
     }
     &:hover {
       background: #0B0C0C;
       text-decoration: none;
-      cursor: pointer;      
+      cursor: pointer;
     }
   }
 

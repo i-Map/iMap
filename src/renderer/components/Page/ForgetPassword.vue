@@ -1,12 +1,12 @@
 <template lang="html">
   <div class="forgetPassword-conatiner">
     <h1 class="forgetPassword-logo"><Icon type="android-map"></Icon>iMap</h1>
-    <Input icon="ios-email-outline" v-model="forgetPasswordModel.email" placeholder="请输入邮箱" style="width: 300px"></Input>   
+    <Input icon="ios-email-outline" v-model="forgetPasswordModel.email" placeholder="请输入邮箱" style="width: 300px"></Input>
     <Button v-if="!this.forgetPasswordLoading" class="forgetPassword-btn" type="primary" style="width: 300px" @click="forgetPassword">发送邮件</Button>
     <Button v-else class="forgetPassword-btn" type="primary" style="width: 300px" loading>邮件发送中...</Button>
-    <div class="forgetPassword-text">    
+    <div class="forgetPassword-text">
       <a @click="goLogin">登录</a>
-    </div>    
+    </div>
   </div>
 </template>
 
@@ -37,7 +37,7 @@ export default {
         }).then(data => {
           this.forgetPasswordLoading = false
           if(data.code === 0) {
-            this.$router.push({ 
+            this.$router.push({
               name: 'Login'
             })
           }
@@ -70,17 +70,17 @@ export default {
       background-color: #1E1E21;
     }
     p {
-      padding: 10px 0;  
-      font-size: 14px; 
+      padding: 10px 0;
+      font-size: 14px;
     }
     .forgetPassword-text {
       margin: 50px 0;
     }
-    a { 
-      font-size: 14px; 
+    a {
+      font-size: 14px;
       color: #C0C0C0;
-      transition: color 0.2s ease-in-out;   
-      cursor: pointer;   
+      transition: color 0.2s ease-in-out;
+      cursor: pointer;
       &:hover {
         color: #7193D9;
       }

@@ -1,8 +1,8 @@
 <template lang="html">
-  <Modal 
-    :value="value" 
-    v-model="showModal" 
-    :closable="false" 
+  <Modal
+    :value="value"
+    v-model="showModal"
+    :closable="false"
     @on-ok="editPoint"
     @on-cancel="cancleModal"
     width="360">
@@ -13,8 +13,8 @@
     <div style="text-align:center">
       <Input class="editPointModal-input" v-model="model[0]" placeholder="地点名称" style="width: 300px"></Input><br>
       <Input class="editPointModal-input" v-model="model[1]" placeholder="经度" style="width: 300px"></Input><br>
-      <Input class="editPointModal-input" v-model="model[2]" placeholder="纬度" style="width: 300px"></Input><br>  
-      <DatePicker class="addPointModal-input" @on-change="getDate($event)" type="date" placeholder="选择日期" style="width: 300px"></DatePicker>       
+      <Input class="editPointModal-input" v-model="model[2]" placeholder="纬度" style="width: 300px"></Input><br>
+      <DatePicker class="addPointModal-input" @on-change="getDate($event)" type="date" placeholder="选择日期" style="width: 300px"></DatePicker>
     </div>
   </Modal>
 </template>
@@ -44,7 +44,7 @@ export default {
         '',
         ''
       ],
-      showModal: false      
+      showModal: false
     }
   },
   computed: mapState({
@@ -74,7 +74,7 @@ export default {
         this.$Message.error('经纬度请输入数字格式')
       else {
         this.$Spin.show()
-        this.showModal = false 
+        this.showModal = false
         this.editExcelData(this.model)
         let updateMapDate = new Date(_.now()).toLocaleString()
         ajax.post({

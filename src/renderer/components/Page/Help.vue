@@ -1,9 +1,9 @@
 <template lang="html">
   <div>
-    <imap-header :active-name="activeName"></imap-header>    
+    <imap-header :active-name="activeName"></imap-header>
     <div class="help-container">
       <p class="content">欢迎使用iMap，在开始之前，请您花费一些时间阅读一下帮助文档</p>
-      <h1>- 新建项目</h1>  
+      <h1>- 新建项目</h1>
       <p class="content">
         每次新建项目时，你将会看到两个选项：导入Excel和自定义输入
         <h2 class="ml-10">导入Excel</h2>
@@ -17,15 +17,15 @@
             第四列：游玩时间（示例：2017.10.10）<br>
             <strong>注意：每次导入新的Excel文件，代表着重新启动项目，之前的数据将会清空</strong>
           </p>
-        <h2 class="ml-10">自定义输入</h2>  
+        <h2 class="ml-10">自定义输入</h2>
           <p class="content ml-10">
             如果你之前拥有项目（可以在 个人中心 - 我的项目 中看到），你将会看到两个按钮：<br>
             新建项目：<br>
             意味着你同样将放弃之前的项目，重新启动一个新的项目
             编辑项目：<br>
             你可以在之前的项目上追加地点
-          </p>      
-      </p>  
+          </p>
+      </p>
       <h1>- 生成地图</h1>
       <p class="content">
         进入制作页面，请先选择地图类型（中国地图，世界地图），再点击生成地图，这样一张旅行地图就完成了。
@@ -46,7 +46,7 @@
       <h1>- 最后</h1>
       <p class="content">
         Enjoy it<br>
-        如有疑问，请联系制作人 xizhouh@gmail.com Trevor
+        如有疑问，请联系制作人 xizhouh@gmail.com | Trevor
       </p>
     </div>
   </div>
@@ -92,7 +92,7 @@ export default {
     }
     .ml-30 {
       margin-left: 30px;
-    }    
+    }
     .ml-40 {
       margin-left: 40px;
     }
@@ -104,7 +104,7 @@ export default {
     }
     .mt-30 {
       margin-top: 30px;
-    }    
+    }
     .mt-40 {
       margin-top: 40px;
     }
@@ -116,7 +116,7 @@ export default {
     }
     .mb-30 {
       margin-bottom: 30px;
-    }    
+    }
     .mb-40 {
       margin-bottom: 40px;
     }
