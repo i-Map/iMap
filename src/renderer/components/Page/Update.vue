@@ -9,7 +9,7 @@
           立即更新
         </a>
       </div>
-      <h2 v-else class="update-tips">暂无更新</h2>
+      <h2 v-else class="update-tips">已是最新版本</h2>
     </section>
   </div>
 </template>
