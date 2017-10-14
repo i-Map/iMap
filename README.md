@@ -12,6 +12,8 @@
 
 ## 下载
 [MacOS](https://github.com/HuangXiZhou/iMap/releases/download/0.0.2-beta/iMap-0.0.2-beta-mac.zip)
+[Windows](https://github.com/HuangXiZhou/iMap/releases/download/0.0.2-beta/iMap-0.0.2-beta-win32.zip)
+[Linux](https://github.com/HuangXiZhou/iMap/releases/download/0.0.2-beta/iMap-0.0.2-beta-linux.zip)
 
 ###### 你可以在 [github.com/HuangXiZhou/iMap/releases](https://github.com/HuangXiZhou/iMap/releases) 上浏览全部的releases
 
