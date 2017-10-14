@@ -17,13 +17,13 @@
 
 ## 启动项目
 
->#install dependencies
+> #install dependencies
 yarn
 
->#serve with hot reload at localhost:8080
+> #serve with hot reload at localhost:8080
 yarn run dev
 
->#build for production(mas, darwin, win32, linux)
+> #build for production(mas, darwin, win32, linux)
 npm run build
 
 ## 更新日志
@@ -41,5 +41,3 @@ npm run build
 [MIT](https://opensource.org/licenses/MIT)
 
 Copyright (c) 2017-present, Trevor
-
-
