@@ -37,6 +37,7 @@ npm run build
 * 添加海外城市坐标支持
 * 一键换肤
 * 集成旅行日记
+* 添加海外国家地图
 
 ## License
 [MIT](https://opensource.org/licenses/MIT)
