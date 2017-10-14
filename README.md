@@ -41,6 +41,9 @@ npm run build
 * 集成旅行日记
 * 添加海外国家地图
 
+## 求一份工作
+[我的简历](https://huangxizhou.com/resume)
+
 ## License
 [MIT](https://opensource.org/licenses/MIT)
 
