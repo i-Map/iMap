@@ -17,14 +17,14 @@
 
 ## 启动项目
 
-> #install dependencies
-yarn
-
-> #serve with hot reload at localhost:8080
-yarn run dev
-
-> #build for production(mas, darwin, win32, linux)
-npm run build
+>  #install dependencies
+ yarn
+>
+ #serve with hot reload at localhost:8080
+ yarn run dev
+>
+ #build for production(mas, darwin, win32, linux)
+ npm run build
 
 ## 更新日志
 0.0.2-Beta
