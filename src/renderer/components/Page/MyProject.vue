@@ -55,10 +55,12 @@ export default {
       this.updateDate = data.updateMapDate
     })
   },
-  computed: mapState({
-    userId: state => state.userInfo.userInfo.objectId || storage.get('userId'),
-    countAlias: 'userId'
-  }),
+  computed: {
+    ...mapState({
+      userId: state => state.userInfo.userInfo.objectId || storage.get('userId'),
+      countAlias: 'userId'
+    })
+  },
   methods: {
     edit() {
       this.$router.push({

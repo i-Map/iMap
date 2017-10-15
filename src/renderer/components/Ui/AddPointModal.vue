@@ -56,7 +56,7 @@ export default {
       countAlias: 'excelData',
       userId: state => state.userInfo.userInfo.objectId || storage.get('userId'),
       countAlias: 'userId'
-    }),
+    })
   },
   methods: {
     ...mapActions({

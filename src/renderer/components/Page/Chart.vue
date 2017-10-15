@@ -72,12 +72,14 @@ export default {
       showDelPointModal: false
     }
   },
-  computed: mapState({
-    excelData: state => state.excel.excelData,
-    countAlias: 'excelData',
-    userId: state => state.userInfo.userInfo.objectId || storage.get('userId'),
-    countAlias: 'userId'
-  }),
+  computed: {
+    ...mapState({
+      excelData: state => state.excel.excelData,
+      countAlias: 'excelData',
+      userId: state => state.userInfo.userInfo.objectId || storage.get('userId'),
+      countAlias: 'userId'
+    })
+  },
   components: {
     ImapHeader,
     ImapAddpointmodal,
