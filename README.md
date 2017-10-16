@@ -22,7 +22,7 @@
 #install dependencies
 yarn
  
-#serve with hot reload at localhost:8080
+#serve with hot reload at localhost:8090
 yarn run dev
  
 #build for production(mas, darwin, win32, linux)
@@ -47,4 +47,4 @@ npm run build
 ## License
 [MIT](https://opensource.org/licenses/MIT)
 
-Copyright (c) 2017-present, Trevor
+Copyright © 2017-present, Trevor
