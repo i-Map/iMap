@@ -25,8 +25,9 @@ export default {
 	/**
 	 * 返回地图数据
 	 * @param {Object} obj
+	 * @param {String} mapType
 	 */
-	getMapData({...obj}) {
+	getMapData({...obj}, mapType) {
 		data = []
 		geoCoordMap = []
 		let geoModel = []
@@ -78,7 +79,7 @@ export default {
 					}
 				},
 				geo: {
-					map: 'china',
+					map: mapType,
 					label: {
 						emphasis: {
 							show: false

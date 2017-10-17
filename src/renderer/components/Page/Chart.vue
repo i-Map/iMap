@@ -96,8 +96,8 @@ export default {
         this.$Message.error('请选择地图类型')
       else {
         if(this.excelData.data !== undefined) {
-          this.option = map.getMapData(this.excelData)
-          this.selectMapType === 'china' ?  ECharts.registerMap('china', chinaMap) : ECharts.registerMap('china', worldMap)
+          this.option = map.getMapData(this.excelData, this.selectMapType)
+          this.selectMapType === 'china' ?  ECharts.registerMap('china', chinaMap) : ECharts.registerMap('world', worldMap)
           this.showChart = true
           this.showEditMapBtn = true
           let updateMapDate = new Date(_.now()).toLocaleString()
