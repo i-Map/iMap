@@ -1,7 +1,7 @@
 {
   "name": "imap",
   "productName": "iMap",
-  "version": "0.0.2-beta",
+  "version": "0.0.3-beta",
   "author": "xizhouh@gmail.com",
   "description": "iMap让你生成专属你的旅行地图",
   "license": "MIT",
