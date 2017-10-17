@@ -25,9 +25,9 @@ export default {
 	/**
 	 * 返回地图数据
 	 * @param {Object} obj
-	 * @param {String} mapType
+	 * @param {Object} options
 	 */
-	getMapData({...obj}, mapType) {
+	getMapData({...obj}, options) {
 		data = []
 		geoCoordMap = []
 		let geoModel = []
@@ -79,7 +79,9 @@ export default {
 					}
 				},
 				geo: {
-					map: mapType,
+					map: options.mapType,
+					zoom: options.zoom,
+					roam: options.roam ? 'move' : false,
 					label: {
 						emphasis: {
 							show: false

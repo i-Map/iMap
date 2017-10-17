@@ -8,6 +8,16 @@
       <a href="javascript:;" class="next-btn" @click="makeupChart">
         生成地图
       </a>
+      <Tooltip content="放大地图" placement="bottom">
+        <a v-if="showEditMapBtn" href="javascript:;" class="add-btn" @click="mapZoomUp">
+          <Icon type="plus"></Icon>
+        </a>
+      </Tooltip> 
+      <Tooltip content="缩小地图" placement="bottom">
+        <a v-if="showEditMapBtn" href="javascript:;" class="minus-btn" @click="mapZoomDown">
+          <Icon type="minus"></Icon>
+        </a>  
+      </Tooltip>    
       <a v-if="showEditMapBtn" href="javascript:;" class="edit-btn" @click="editMap">
         编辑地图
       </a>
@@ -65,6 +75,11 @@ export default {
           value: 'world',
           label: '世界地图'
       }],
+      userOptions: {
+        mapType: 'china',
+        zoom: 1,
+        roam: false
+      },
       showEditMapBtn: false,
       editMapModal: false,
       showAddPointModal: false,
@@ -96,7 +111,8 @@ export default {
         this.$Message.error('请选择地图类型')
       else {
         if(this.excelData.data !== undefined) {
-          this.option = map.getMapData(this.excelData, this.selectMapType)
+          this.userOptions.mapType = this.selectMapType
+          this.option = map.getMapData(this.excelData, this.userOptions)
           this.selectMapType === 'china' ?  ECharts.registerMap('china', chinaMap) : ECharts.registerMap('world', worldMap)
           this.showChart = true
           this.showEditMapBtn = true
@@ -119,8 +135,8 @@ export default {
             }
           }).then(data => {
             this.$Spin.hide()
-            this.option = map.getMapData(data.mapData)
-            this.selectMapType === 'china' ?  ECharts.registerMap('china', chinaMap) : ECharts.registerMap('china', worldMap)
+            this.option = map.getMapData(data.mapData, this.userOptions)
+            this.selectMapType === 'china' ?  ECharts.registerMap('china', chinaMap) : ECharts.registerMap('world', worldMap)
             this.showChart = true
             this.setExcelData(data.mapData)
             this.showEditMapBtn = true
@@ -136,6 +152,23 @@ export default {
           })
         }
       }
+    },
+    mapZoomUp() {
+      if(this.userOptions.zoom !== 5) {
+        this.userOptions.zoom ++
+        this.userOptions.roam = true
+        this.option = map.getMapData(this.excelData, this.userOptions)
+        this.selectMapType === 'china' ?  ECharts.registerMap('china', chinaMap) : ECharts.registerMap('world', worldMap)
+      }
+    },
+    mapZoomDown() {
+      if(this.userOptions.zoom !== 1) {
+        this.userOptions.zoom --
+      } else {
+        this.userOptions.roam = false        
+      }
+      this.option = map.getMapData(this.excelData, this.userOptions)
+      this.selectMapType === 'china' ?  ECharts.registerMap('china', chinaMap) : ECharts.registerMap('world', worldMap)
     },
     editMap() {
       this.editMapModal = true
@@ -174,7 +207,7 @@ export default {
     padding: 4px 10px;
   }
 
-  .upload-xls, .makeChart-btn, .next-btn, .edit-btn, .point-btn {
+  .upload-xls, .makeChart-btn, .next-btn, .edit-btn, .point-btn, .add-btn, .minus-btn {
     padding: 4px 40px;
     position: relative;
     display: inline-block;
@@ -216,5 +249,14 @@ export default {
 
   .addPoint-btn {
     margin-top: 40px;
+  }
+
+  .add-btn, .minus-btn {
+    padding: 4px 10px;
+  }
+
+  .add-btn {
+    margin-left: 6px;
+    margin-right: 6px;
   }
 </style>
