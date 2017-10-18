@@ -21,6 +21,7 @@ import tool from '@/tool/index.js'
 import ajax from '@/server/ajax.js'
 import url from '@/server/url.js'
 import storage from 'store'
+import mapApiKey from '@/key/mapApiKey.js'
 export default {
   name: "Login",
   data() {
@@ -46,6 +47,20 @@ export default {
         name: 'Register'
       })
     },
+    getUserCountry() {
+      ajax.jsonp({
+        url: url.GETUSERCOUNTRY,
+        data: {
+          ak: mapApiKey.BAIDU,
+          coor: 'bd09ll'
+        }
+      }).then(data => {
+        if(data.status !== 0)
+          storage.set('useGoogle', true)
+        else
+          storage.set('useGoogle', false)
+      })
+    },
     login() {
       if (!tool.judgeEmail(this.emailLoginModel.email))
         this.$Message.error('请输入正确邮箱')
@@ -59,6 +74,7 @@ export default {
         }).then(data => {
           this.loginLoading = false
           if(data.code === 0) {
+            this.getUserCountry()
             storage.set('accessToken', data.data.accessToken)
             storage.set('userId', data.data.userId)
             storage.set('userInfo', data.data.userInfo)

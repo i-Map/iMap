@@ -30,6 +30,7 @@ import storage from 'store'
 import ajax from '@/server/ajax.js'
 import url from '@/server/url.js'
 import tool from '@/tool/index.js'
+import mapApiKey from '@/key/mapApiKey.js'
 export default {
   name: "AddPointModal",
   props: {
@@ -66,24 +67,42 @@ export default {
     getLocation() {
       if(this.model[0] !== '') {
         this.$Spin.show()
-        ajax.getLocation({
-          url: url.GETLOCATION_CHINA,
-          data: {
-            address: this.model[0],
-            output: 'json',
-            ak: 'O9WWqYCWQ0d0N1KI85Blg7X2fSBsxOAs',
-            callback: 'showLocation'
-          }
-        }).then(data => {
-          if(data.result.level === '城市') {
-            this.model[1] = data.result.location.lng
-            this.model[2] = data.result.location.lat
-            this.hasGetLocation = true
-          } else {
-            this.$Message.error('当前只能获取中国城市坐标')
-          }
-          this.$Spin.hide()
-        })
+        if(storage.get('useGoogle')) {
+          ajax.get({
+            url: url.GETLOCATION_WORLD,
+            data: {
+              address: this.model[0],
+              key: mapApiKey.GOOGLE
+            }
+          }).then(data => {
+            if(data.results[0]) {
+              this.model[1] = data.results[0].geometry.location.lng
+              this.model[2] = data.results[0].geometry.location.lat
+              this.hasGetLocation = true
+            } else {
+              this.$Message.error('输入错误')
+            }
+          })
+        } else {
+          ajax.jsonp({
+            url: url.GETLOCATION_CHINA,
+            data: {
+              address: this.model[0],
+              output: 'json',
+              ak: mapApiKey.BAIDU,
+              callback: 'showLocation'
+            }
+          }).then(data => {
+            if(data.result.level === '城市') {
+              this.model[1] = data.result.location.lng
+              this.model[2] = data.result.location.lat
+              this.hasGetLocation = true
+            } else {
+              this.$Message.error('您身在国内不能获取国外地址哦~')
+            }
+          })
+        }
+        this.$Spin.hide()
       }
     },
     addPoint() {

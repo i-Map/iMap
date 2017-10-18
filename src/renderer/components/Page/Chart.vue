@@ -12,12 +12,12 @@
         <a v-if="showEditMapBtn" href="javascript:;" class="add-btn" @click="mapZoomUp">
           <Icon type="plus"></Icon>
         </a>
-      </Tooltip> 
+      </Tooltip>
       <Tooltip content="缩小地图" placement="bottom">
         <a v-if="showEditMapBtn" href="javascript:;" class="minus-btn" @click="mapZoomDown">
           <Icon type="minus"></Icon>
-        </a>  
-      </Tooltip>    
+        </a>
+      </Tooltip>
       <a v-if="showEditMapBtn" href="javascript:;" class="edit-btn" @click="editMap">
         编辑地图
       </a>
@@ -165,7 +165,7 @@ export default {
       if(this.userOptions.zoom !== 1) {
         this.userOptions.zoom --
       } else {
-        this.userOptions.roam = false        
+        this.userOptions.roam = false
       }
       this.option = map.getMapData(this.excelData, this.userOptions)
       this.selectMapType === 'china' ?  ECharts.registerMap('china', chinaMap) : ECharts.registerMap('world', worldMap)
