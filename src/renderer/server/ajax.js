@@ -4,8 +4,8 @@ import jsonp from 'jsonp'
 import qs from 'qs'
 axios.defaults.timeout = 1000000; //响应时间
 axios.defaults.headers.post['Content-Type'] = 'application/json' //通信格式
-axios.defaults.baseURL = 'http://localhost:3000/' //配置接口地址
-// axios.defaults.baseURL = 'https://imap.leanapp.cn' //配置接口地址
+// axios.defaults.baseURL = 'http://localhost:3000/' //配置接口地址
+axios.defaults.baseURL = 'https://imap.leanapp.cn' //配置接口地址
 
 // 返回相对路由
 const getUrlRelativePath = () => {
