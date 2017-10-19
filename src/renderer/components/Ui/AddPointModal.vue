@@ -67,7 +67,6 @@ export default {
     getLocation() {
       if(this.model[0] !== '') {
         this.$Spin.show()
-        // if(storage.get('useGoogle')) {
         ajax.get({
           url: url.GETLOCATION_WORLD,
           data: {
