@@ -48,10 +48,6 @@ const router = new Router({
       name: 'Help',
       component: resolve => require(['@/components/Page/Help'], resolve)
     }, {
-      path: '/update',
-      name: 'Update',
-      component: resolve => require(['@/components/Page/Update'], resolve)
-    }, {
       path: '*',
       redirect: '/'
     }

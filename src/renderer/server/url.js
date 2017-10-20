@@ -8,6 +8,5 @@ export default {
   ASYNC_UPLOAD     : '/api/v1/async/upload',
   ASYNC_DOWNLOAD   : '/api/v1/async/download',
   DELMAPDATA       : '/api/v1/delMapData',
-  GETLOCATION_WORLD: 'https://google.cn/maps/api/geocode/json',
-  GETNEWVERSION    : '/api/v1/getUpdate'
+  GETLOCATION_WORLD: 'https://google.cn/maps/api/geocode/json'
 }
