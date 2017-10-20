@@ -60,6 +60,10 @@ export default {
         }).then(data => {
           this.loginLoading = false
           if(data.code === 0) {
+            new window.Notification('iMap', {
+              body: '欢迎您使用 iMap , 想进一步了解 iMap 请移步帮助文档',
+              silent: true
+            })
             storage.set('accessToken', data.data.accessToken)
             storage.set('userId', data.data.userId)
             storage.set('userInfo', data.data.userInfo)

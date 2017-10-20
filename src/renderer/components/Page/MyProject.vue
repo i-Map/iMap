@@ -76,6 +76,10 @@ export default {
           userId: this.userId || storage.get('userId')
         }
       }).then(data => {
+        new window.Notification('iMap', {
+          body: '项目删除成功',
+          silent: true
+        })
         this.$Spin.hide()
         this.$router.push({
           name: 'Home'
