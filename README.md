@@ -21,10 +21,10 @@
 ```bash
 #install dependencies
 yarn
- 
+
 #serve with hot reload at localhost:8090
 yarn run dev
- 
+
 #build for production(mas, darwin, win32, linux)
 npm run build
 ```
@@ -34,6 +34,7 @@ npm run build
 
 * 修复若干bug
 * 暂时移除应用内更新
+* 添加桌面提示
 * 添加海外城市坐标支持
 * 支持地图放大、拖动
 
