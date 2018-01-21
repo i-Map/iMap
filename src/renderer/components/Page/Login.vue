@@ -5,6 +5,7 @@
     <Input type="password" icon="ios-locked-outline" v-model="emailLoginModel.password" placeholder="请输入密码" style="width: 300px"></Input>
     <Button v-if="!loginLoading" class="login-btn" type="primary" style="width: 300px" @click="login">登录</Button>
     <Button v-else class="login-btn" type="primary" style="width: 300px" loading>登录中...</Button>
+    <Button @click="github">GitHub</Button>
     <div class="login-text">
       <a @click="goForgetPassword">忘记密码？</a>
     </div>
@@ -16,6 +17,7 @@
 
 
 <script>
+var shell = require('electron').shell;
 import { mapActions } from 'vuex'
 import tool from '@/tool/index.js'
 import ajax from '@/server/ajax.js'
@@ -74,6 +76,31 @@ export default {
           }
         })
       }
+    },
+    getUrlData(name){
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null)
+      return unescape(r[2]);
+      return null;
+    },
+
+    github() {
+      window.location.href = 'https://github.com/login/oauth/authorize?client_id=aade15b52a338bad73c5&redirect_uri=http://localhost:9080/#/auth/login'
+    }
+  },
+
+  created() {
+    var code = this.getUrlData('code') || '';
+    if (code) {
+      ajax.get({
+        url: 'https://api.imap.trevor.top/v1/oauth/github',
+        data: {
+          code: code
+        }
+      }).then(data => {
+        console.log(data)
+      })
     }
   }
 }
@@ -111,5 +138,16 @@ export default {
         color: #7193D9;
       }
     }
+  }
+
+  webview {
+    display:inline-flex;
+    width:640px;
+    height:480px;
+  }
+  webview.hide {
+    flex: 0 1;
+    width: 0px;
+    height: 0px;
   }
 </style>
