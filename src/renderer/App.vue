@@ -11,10 +11,9 @@
 </script>
 
 <style lang="less">
-  @import './assets/my-theme/custom.less';
-  .ivu-message-custom-content {
-    span {
-      color: @primary-color
-    }
+  #app {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #FFFEFF;
   }
 </style>

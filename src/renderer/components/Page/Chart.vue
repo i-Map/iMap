@@ -188,7 +188,7 @@ export default {
 
 
 <style lang="less" scoped>
-@import '../../assets/my-theme/custom.less';
+// @import '../../assets/my-theme/custom.less';
   .echarts {
     width: 100%;
     height: 465px;

@@ -1,6 +1,5 @@
 <template lang="html">
   <div class="register-conatiner">
-    <h1 class="register-logo"><Icon type="android-map"></Icon>iMap</h1>
     <Input icon="ios-email-outline" v-model="registerModel.email" placeholder="请输入邮箱" style="width: 300px"></Input>
     <Input icon="android-call" v-model="registerModel.phone" placeholder="请输入手机号" style="width: 300px"></Input>
     <Input type="password" icon="ios-locked-outline" v-model="password_1" placeholder="请输入密码" style="width: 300px"></Input>
@@ -63,7 +62,7 @@ export default {
 
 
 <style lang="less" scoped>
-  @import '../../assets/my-theme/custom.less';
+  // @import '../../assets/my-theme/custom.less';
   .register-conatiner {
     .register-logo {
       margin-top: 20px;

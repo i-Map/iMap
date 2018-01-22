@@ -95,7 +95,7 @@ export default {
 
 
 <style lang="less" scoped>
-@import '../../assets/my-theme/custom.less';
+// @import '../../assets/my-theme/custom.less';
   .delPointModal-input {
     margin-bottom: 12px;
   }

@@ -95,7 +95,7 @@ export default {
 
 
 <style lang="less" scoped>
-  @import '../../assets/my-theme/custom.less';
+  // @import '../../assets/my-theme/custom.less';
   .myProject-container {
     margin: 66px 50px;
     width: 900px;

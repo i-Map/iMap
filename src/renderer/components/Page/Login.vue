@@ -1,23 +1,39 @@
 <template lang="html">
-  <div class="login-conatiner">
-    <h1 class="login-logo"><Icon type="android-map"></Icon></Icon>iMap</h1>
-    <Input icon="ios-email-outline" v-model="emailLoginModel.email" placeholder="请输入邮箱" style="width: 300px"></Input>
-    <Input type="password" icon="ios-locked-outline" v-model="emailLoginModel.password" placeholder="请输入密码" style="width: 300px"></Input>
-    <Button v-if="!loginLoading" class="login-btn" type="primary" style="width: 300px" @click="login">登录</Button>
-    <Button v-else class="login-btn" type="primary" style="width: 300px" loading>登录中...</Button>
-    <Button @click="github">GitHub</Button>
-    <div class="login-text">
-      <a @click="goForgetPassword">忘记密码？</a>
+  <div class="login-container">
+    <div class="form-group has-feedback">
+      <input class="form-control" type="text" v-model="emailLoginModel.email" :placeholder="$t('m.login.input_email')">
+      <span class="form-control-feedback fui-mail"></span>
     </div>
-    <div class="login-text">
-      <a @click="goRegister">注册</a>
+
+    <div class="form-group has-feedback">
+      <input class="form-control" type="password" v-model="emailLoginModel.password" :placeholder="$t('m.login.input_password')">
+      <span class="form-control-feedback fui-lock"></span>
     </div>
+
+    <button class="form-group btn btn-primary" @click="login">
+      {{ $t("m.login.submit") }}
+    </button>
+
+    <button class="form-group btn btn-inverse" @click="githubLogin">
+      {{ $t("m.login.github") }}
+      <span class="fui-github"></span>
+    </button>
+
+    <a class="link" @click="goForgetPassword">
+      {{ $t("m.login.reset") }}
+    </a>
+
+    <a class="link" @click="goRegister">
+      {{ $t("m.login.register") }}
+    </a>
+
+    <imap-message class="message" :show="message.show" :msg="message.content" :type="message.type"></imap-message>
   </div>
 </template>
 
 
 <script>
-var shell = require('electron').shell;
+var shell = require('electron').shell
 import { mapActions } from 'vuex'
 import tool from '@/tool/index.js'
 import ajax from '@/server/ajax.js'
@@ -28,6 +44,11 @@ export default {
   name: "Login",
   data() {
     return {
+      message: {
+        type: '',
+        show: false,
+        content: ''
+      },
       emailLoginModel: {
         email: '',
         password: ''
@@ -39,16 +60,19 @@ export default {
     ...mapActions({
       setUserInfo: 'setUserInfo'
     }),
+
     goForgetPassword() {
       this.$router.push({
         name: 'ForgetPassword'
       })
     },
+
     goRegister() {
       this.$router.push({
         name: 'Register'
       })
     },
+
     login() {
       if (!tool.judgeEmail(this.emailLoginModel.email))
         this.$Message.error('请输入正确邮箱')
@@ -77,6 +101,7 @@ export default {
         })
       }
     },
+
     getUrlData(name){
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
       var r = window.location.search.substr(1).match(reg);
@@ -85,7 +110,7 @@ export default {
       return null;
     },
 
-    github() {
+    githubLogin() {
       window.location.href = 'https://github.com/login/oauth/authorize?client_id=aade15b52a338bad73c5&redirect_uri=http://localhost:9080/#/auth/login'
     }
   },
@@ -108,46 +133,26 @@ export default {
 
 
 <style lang="less" scoped>
-  @import '../../assets/my-theme/custom.less';
-  .login-conatiner {
-    .login-logo {
-      margin-top: 20px;
-      margin-bottom: 50px;
-      color: #D3D3D3;
-      cursor: default;
+  // @import '../../assets/my-theme/custom.less';
+  .login-container {
+    .btn {
+      width: 100%;
     }
-    input {
-      margin-bottom: 16px;
-    }
-    .login-btn {
-      background-color: #1E1E21;
-    }
-    p {
-      padding: 10px 0;
+    .link {
+      margin: 0 0 6px 0;
+      display: block;
       font-size: 14px;
-    }
-    .login-text {
-      margin: 16px 0;
-    }
-    a {
-      font-size: 14px;
-      color: #C0C0C0;
-      transition: color 0.2s ease-in-out;
+      color: #AAA;
+      transition: .25s;
       cursor: pointer;
       &:hover {
-        color: #7193D9;
+        color: #1abc9c;
       }
     }
-  }
-
-  webview {
-    display:inline-flex;
-    width:640px;
-    height:480px;
-  }
-  webview.hide {
-    flex: 0 1;
-    width: 0px;
-    height: 0px;
+    .message {
+      position: fixed;
+      top: -46%;
+      left: -75%;
+    }
   }
 </style>

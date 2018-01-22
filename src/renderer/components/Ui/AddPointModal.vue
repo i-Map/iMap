@@ -141,7 +141,7 @@ export default {
 
 
 <style lang="less" scoped>
-@import '../../assets/my-theme/custom.less';
+// @import '../../assets/my-theme/custom.less';
   .addPointModal-input_1 {
     margin-bottom: 18px;
   }

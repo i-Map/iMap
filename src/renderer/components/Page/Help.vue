@@ -73,7 +73,7 @@ export default {
 
 
 <style lang="less" scoped>
-  @import '../../assets/my-theme/custom.less';
+  // @import '../../assets/my-theme/custom.less';
   .help-container {
     margin: 30px 30px;
     cursor: default;

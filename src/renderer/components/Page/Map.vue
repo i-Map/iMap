@@ -36,7 +36,7 @@ export default {
 
 
 <style lang="less" scoped>
-  @import '../../assets/my-theme/custom.less';
+  // @import '../../assets/my-theme/custom.less';
   .map-container {
     text-align: center;
     cursor: default;

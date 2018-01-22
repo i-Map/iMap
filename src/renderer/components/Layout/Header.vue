@@ -10,7 +10,7 @@
             <MenuItem name="3-1">我的项目</MenuItem>
             <MenuItem name="3-2">帮助文档</MenuItem>
         </MenuGroup>
-        <MenuGroup title="操作">        
+        <MenuGroup title="操作">
             <MenuItem name="3-3">登出</MenuItem>
         </MenuGroup>
     </Submenu>
@@ -71,7 +71,7 @@ export default {
 
 
 <style lang="less" scoped>
-@import '../../assets/my-theme/custom.less';
+// @import '../../assets/my-theme/custom.less';
   .header-userName {
     padding: 0 20px;
     font-weight: 600;

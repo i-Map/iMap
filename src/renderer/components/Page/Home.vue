@@ -155,7 +155,7 @@ import url from '@/server/url.js'
 
 
 <style lang="less" scoped>
-  @import '../../assets/my-theme/custom.less';
+  // @import '../../assets/my-theme/custom.less';
   .home-container {
     margin-left: 30px;
     margin-right: 30px;

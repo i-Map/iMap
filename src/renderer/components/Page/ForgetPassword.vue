@@ -55,7 +55,7 @@ export default {
 
 
 <style lang="less">
-  @import '../../assets/my-theme/custom.less';
+  // @import '../../assets/my-theme/custom.less';
   .forgetPassword-conatiner {
     .forgetPassword-logo {
       margin-top: 20px;

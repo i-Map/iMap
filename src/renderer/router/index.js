@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import storage from 'store'
-import Home from '@/components/Page/Home'
 
 Vue.use(Router)
 
@@ -10,7 +9,7 @@ const router = new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home,
+      component: resolve => require(['@/components/Page/Home'], resolve),
       meta: { requiresAuth: true }
     }, {
       path: '/auth',
