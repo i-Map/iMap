@@ -74,8 +74,14 @@ export default {
     },
 
     login() {
-      if (!tool.judgeEmail(this.emailLoginModel.email))
-        this.$Message.error('请输入正确邮箱')
+      if (!tool.judgeEmail(this.emailLoginModel.email)) {
+        const lang = this.$i18n.locale
+        if (lang === 'zh-CN') {
+          this.$Message.error(this.$i18n.messages['zh-CN'].m.message.login_email)
+        } else {
+          this.$Message.error(this.$i18n.messages['en-US'].m.message.login_email)
+        }
+      }
       else if(!tool.judgePassword(this.emailLoginModel.password))
         this.$Message.error('请输入正确密码')
       else {
