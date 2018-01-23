@@ -124,6 +124,9 @@ export default {
 
       this.$http.get({
         url: this.$url.LOGIN_GITHUB,
+        headers: {
+          'Accept-Language': this.$i18n.locale
+        },
         data: {
           code: code
         }

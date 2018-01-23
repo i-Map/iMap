@@ -23,14 +23,12 @@ Vue.use(storage)
 Vue.component('Spin', Spin)
 
 const i18n = new VueI18n({
-  locale: 'zh-CN',
+  locale: storage.get('lang') || 'zh-CN',
   messages: {
     'zh-CN': require('@/common/lang/zh'),
     'en-US': require('@/common/lang/en')
   }
 })
-
-window.$lang = i18n.locale
 
 Vue.prototype.$Message = Message
 Vue.prototype.$Spin = Spin

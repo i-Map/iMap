@@ -24,6 +24,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import storage from 'store'
 import logo from '@/assets/logo.png'
 
 export default {
@@ -32,7 +33,7 @@ export default {
   data() {
     return {
       logo,
-      localLang: 'zh-CN'
+      localLang: storage.get('lang') || 'zh-CN'
     }
   },
 
@@ -47,6 +48,7 @@ export default {
       } else {
         this.localLang = 'zh-CN'
       }
+
       this.$i18n.locale = this.localLang
       this.setLang(this.localLang)
     },
