@@ -24,7 +24,8 @@ function createWindow () {
     width: 1000,
     resizable: false,
     fullscreen: false,
-    fullscreenable: false
+    fullscreenable: false,
+    backgroundColor: '#59BBA5'
   })
 
   mainWindow.loadURL(winURL)
