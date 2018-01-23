@@ -1,6 +1,6 @@
 export default {
   REGISTER         : '/api/v1/auth/register',
-  LOGIN_EMAIL      : '/v1/login',
+  LOGIN_EMAIL      : '/v1/logi',
   LOGIN_GITHUB     : '/v1/oauth/github',
   ASKCODE          : '/api/v1/auth/login/askCode',
   PHONELOGIN       : '/api/v1/auth/login/phone',

@@ -33,8 +33,6 @@
 <script>
 import { mapActions } from 'vuex'
 import tool from '@/tool/index.js'
-import ajax from '@/server/ajax.js'
-import url from '@/server/url.js'
 import storage from 'store'
 import mapApiKey from '@/key/mapApiKey.js'
 
@@ -44,6 +42,7 @@ export default {
   data() {
     return {
       loading: false,
+      useGithubLogin: storage.get('useGithubLogin') || false,
       model: {
         email: '',
         password: ''
@@ -75,8 +74,8 @@ export default {
         this.$Message.error(this.$i18n.messages[this.$i18n.locale].m.message.login_password)
       } else {
         this.loginLoading = true
-        ajax.post({
-          url: url.LOGIN_EMAIL,
+        this.$http.post({
+          url: this.$url.LOGIN_EMAIL,
           data: this.model
         }).then(data => {
           this.loginLoading = false
@@ -98,29 +97,32 @@ export default {
     },
 
     getUrlData(name){
-      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-      var r = window.location.search.substr(1).match(reg);
+      const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)")
+      const r = window.location.search.substr(1).match(reg)
       if (r != null)
-      return unescape(r[2]);
+      return unescape(r[2])
       return null;
     },
 
     githubLogin() {
+      storage.set('useGithubLogin', true)
       window.location.href = 'https://github.com/login/oauth/authorize?client_id=aade15b52a338bad73c5&redirect_uri=http://localhost:9080/#/auth/login'
     }
   },
 
   created() {
-    var code = this.getUrlData('code') || '';
-    if (code) {
+    const code = this.getUrlData('code') || ''
+    console.log(document.cookie)
+    if (this.useGithubLogin && code) {
       this.$Spin.show()
-      ajax.get({
-        url: url.LOGIN_GITHUB,
+      this.$http.get({
+        url: this.$url.LOGIN_GITHUB,
         data: {
           code: code
         }
       }).then(data => {
         this.$Spin.hide()
+        storage.set('useGithubLogin', false)
         console.log(data)
       })
     }

@@ -1,10 +1,12 @@
 import Vue from 'vue'
-
 import App from './App'
 import router from './router'
 import store from './store'
 import VueI18n from 'vue-i18n'
 import { Message, Spin } from 'iview'
+import ajax from '@/server/ajax'
+import url from '@/server/url'
+import storage from 'store'
 
 import '@/filter/index.js'
 import 'iview/dist/styles/iview.css'
@@ -17,6 +19,7 @@ if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.config.productionTip = false
 
 Vue.use(VueI18n)
+Vue.use(storage)
 
 const i18n = new VueI18n({
   locale: 'zh-CN',
@@ -26,8 +29,12 @@ const i18n = new VueI18n({
   }
 })
 
+window.$lang = i18n.locale
+
 Vue.prototype.$Message = Message
 Vue.prototype.$Spin = Spin
+Vue.prototype.$http = ajax
+Vue.prototype.$url = url
 
 /* eslint-disable no-new */
 new Vue({
@@ -35,5 +42,6 @@ new Vue({
   router,
   store,
   i18n,
+  storage,
   template: '<App/>'
 }).$mount('#app')

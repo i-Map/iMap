@@ -9,6 +9,14 @@ export const setUserInfo = ({ commit }, data) => {
 }
 
 /**
+ * 保存语言
+ * @param {Object} data
+ */
+export const setLang = ({ commit }, data) => {
+    commit(types.SET_LANG, data)
+}
+
+/**
  * 保存Excel数据
  * @param {Object} data
  */
