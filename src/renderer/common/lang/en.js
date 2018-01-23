@@ -13,6 +13,7 @@ export const m = {
   message: {
     login_email: 'Please use correct email address',
     login_password: 'Password should under the rule',
-    welcome: 'Welcome to iMap, if you want to know more, please move to the help documentation'
+    welcome: 'Welcome to iMap, if you want to know more, please move to the help documentation',
+    loading: 'Loading...'
   }
 }

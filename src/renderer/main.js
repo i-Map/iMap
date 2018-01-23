@@ -20,6 +20,7 @@ Vue.config.productionTip = false
 
 Vue.use(VueI18n)
 Vue.use(storage)
+Vue.component('Spin', Spin)
 
 const i18n = new VueI18n({
   locale: 'zh-CN',

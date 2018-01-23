@@ -73,12 +73,15 @@ export default {
       } else if (!tool.judgePassword(this.model.password)) {
         this.$Message.error(this.$i18n.messages[this.$i18n.locale].m.message.login_password)
       } else {
-        this.loginLoading = true
+        this.$Spin.show({
+          render: (h) => {
+            return h('div', this.$i18n.messages[this.$i18n.locale].m.message.loading)
+          }
+        }, this)
         this.$http.post({
           url: this.$url.LOGIN_EMAIL,
           data: this.model
         }).then(data => {
-          this.loginLoading = false
           if(data.code === 0) {
             new window.Notification('iMap', {
               body: this.$i18n.messages[this.$i18n.locale].m.message.welcome,
@@ -112,16 +115,19 @@ export default {
 
   created() {
     const code = this.getUrlData('code') || ''
-    console.log(document.cookie)
     if (this.useGithubLogin && code) {
-      this.$Spin.show()
+      this.$Spin.show({
+        render: (h) => {
+          return h('div', this.$i18n.messages[this.$i18n.locale].m.message.loading)
+        }
+      }, this)
+
       this.$http.get({
         url: this.$url.LOGIN_GITHUB,
         data: {
           code: code
         }
       }).then(data => {
-        this.$Spin.hide()
         storage.set('useGithubLogin', false)
         console.log(data)
       })

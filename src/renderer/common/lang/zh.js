@@ -13,6 +13,7 @@ export const m = {
   message: {
     login_email: '请输入正确的 Email 地址',
     login_password: '请按标准输入密码',
-    welcome: '欢迎您使用 iMap , 想进一步了解 iMap 请移步帮助文档'
+    welcome: '欢迎您使用 iMap , 想进一步了解 iMap 请移步帮助文档',
+    loading: '加载中...'
   }
 }
