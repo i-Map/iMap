@@ -1,29 +1,29 @@
 <template lang="html">
-  <div class="login-container">
-    <div class="form-group has-feedback">
+  <div class="login-container" @keydown.enter="login">
+    <div class="form-group has-feedback animated fadeInDown">
       <input class="form-control" type="text" v-model="model.email" :placeholder="$t('m.login.input_email')">
       <span class="form-control-feedback fui-mail"></span>
     </div>
 
-    <div class="form-group has-feedback">
+    <div class="form-group has-feedback animated fadeInDown">
       <input class="form-control" type="password" v-model="model.password" :placeholder="$t('m.login.input_password')">
       <span class="form-control-feedback fui-lock"></span>
     </div>
 
-    <button class="form-group btn btn-primary" @click="login">
+    <button class="form-group btn btn-primary animated fadeInDown" @click="login">
       {{ $t("m.login.submit") }}
     </button>
 
-    <button class="form-group btn btn-inverse" @click="githubLogin">
+    <button class="form-group btn btn-inverse animated fadeInDown" @click="githubLogin">
       {{ $t("m.login.github") }}
       <span class="fui-github"></span>
     </button>
 
-    <a class="link" @click="goForgetPassword">
+    <a class="link animated fadeInDown" @click="goForgetPassword">
       {{ $t("m.login.reset") }}
     </a>
 
-    <a class="link" @click="goRegister">
+    <a class="link animated fadeInDown" @click="goRegister">
       {{ $t("m.login.register") }}
     </a>
   </div>
@@ -34,7 +34,6 @@
 import { mapActions } from 'vuex'
 import tool from '@/tool/index.js'
 import storage from 'store'
-import mapApiKey from '@/key/mapApiKey.js'
 
 export default {
   name: "Login",
@@ -69,9 +68,9 @@ export default {
 
     login() {
       if (!tool.judgeEmail(this.model.email)) {
-        this.$Message.error(this.$i18n.messages[this.$i18n.locale].m.message.login_email)
+        this.$Message.warning(this.$i18n.messages[this.$i18n.locale].m.message.login_email)
       } else if (!tool.judgePassword(this.model.password)) {
-        this.$Message.error(this.$i18n.messages[this.$i18n.locale].m.message.login_password)
+        this.$Message.warning(this.$i18n.messages[this.$i18n.locale].m.message.login_password)
       } else {
         this.$Spin.show({
           render: (h) => {
@@ -99,12 +98,11 @@ export default {
       }
     },
 
-    getUrlData(name){
-      const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)")
+    getUrlData(e){
+      const reg = new RegExp("(^|&)" + e + "=([^&]*)(&|$)")
       const r = window.location.search.substr(1).match(reg)
-      if (r != null)
-      return unescape(r[2])
-      return null;
+      if (r != null) return unescape(r[2])
+      return null
     },
 
     githubLogin() {

@@ -58,43 +58,5 @@ export default {
 
 
 <style lang="less">
-  // // @import '../../assets/my-theme/custom.less';
-  .auth {
-    width: 100%;
-    height: 100vh;
-    background-color: #59BBA5;
-    &-item {
-      padding: 10px 0 20px 0;
-      text-align: center;
-      &__logo {
-        margin: 40px 10px 0 0;
-        width: 80px;
-        height: 80px;
-      }
-      &__view {
-        position: fixed;
-        top: 58%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        padding: 18px 18px;
-        width: 400px;
-        border-radius: 8px;
-        background-color: #EDEEF1;
-      }
-    }
-    .bootstrap-switch-square {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-    }
-  }
-
-  // 覆盖 Flat UI 默认样式
-  .form-control, .select2-search input[type=text] {
-    border: 2px solid #EDEEF1;
-  }
-
-  .bootstrap-switch-primary~.bootstrap-switch-handle-off:before {
-    background-color: #16A085;
-  }
+@import './Auth.less';
 </style>

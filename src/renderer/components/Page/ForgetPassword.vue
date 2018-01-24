@@ -1,116 +1,62 @@
 <template lang="html">
-  <div class="forgetPassword-conatiner">
-    <h1 class="forgetPassword-logo"><Icon type="android-map"></Icon>iMap</h1>
-    <Input icon="ios-email-outline" v-model="forgetPasswordModel.email" placeholder="请输入邮箱" style="width: 300px"></Input>
-    <Button v-if="!this.forgetPasswordLoading" class="forgetPassword-btn" type="primary" style="width: 300px" @click="forgetPassword">发送邮件</Button>
-    <Button v-else class="forgetPassword-btn" type="primary" style="width: 300px" loading>邮件发送中...</Button>
-    <div class="forgetPassword-text">
-      <a @click="goLogin">登录</a>
+  <div class="forgetPassword-container" @keydown.enter="forgetPassword">
+    <div class="form-group has-feedback animated fadeInDown">
+      <input class="form-control" type="text" v-model="model.email" :placeholder="$t('m.forgetPassword.input_email')">
+      <span class="form-control-feedback fui-mail"></span>
     </div>
+
+    <button class="form-group btn btn-info animated fadeInDown" @click="forgetPassword">
+      {{ $t("m.forgetPassword.submit") }}
+    </button>
+
+    <a class="link animated fadeInDown" @click="goLogin">
+      {{ $t("m.forgetPassword.login") }}
+    </a>
   </div>
 </template>
 
 
 <script>
 import tool from '@/tool/index.js'
-import ajax from '@/server/ajax.js'
-import url from '@/server/url.js'
+
 export default {
   name: "ForgetPassword",
+
   data() {
     return {
-      forgetPasswordModel: {
+      model: {
         email: ''
-      },
-      forgetPasswordLoading: false
+      }
     }
   },
+
   methods: {
     forgetPassword() {
-      if(!tool.judgeEmail(this.forgetPasswordModel.email))
-        this.$Message.error('请输入正确邮箱')
-      else {
-        this.forgetPasswordLoading = true
-        ajax.post({
-          url: url.FORGETPASSWORD,
-          data: this.forgetPasswordModel
-        }).then(data => {
-          this.forgetPasswordLoading = false
-          if(data.code === 0) {
-            this.$router.push({
-              name: 'Login'
-            })
+      if (!tool.judgeEmail(this.model.email)) {
+        this.$Message.warning(this.$i18n.messages[this.$i18n.locale].m.message.forgetPassword_email)
+      } else {
+        this.$Spin.show({
+          render: (h) => {
+            return h('div', this.$i18n.messages[this.$i18n.locale].m.message.loading)
           }
+        }, this)
+
+        this.$http.post({
+          url: this.$url.FORGETPASSWORD,
+          data: this.model
+        }).then(() => {
+          this.$router.push({ path: '/auth/login' })
         })
       }
     },
     goLogin() {
-      this.$router.push({
-        name: 'Login'
-      })
+      this.$router.push({ path: '/auth/login' })
     }
   }
 }
 </script>
 
 
-<style lang="less">
-  // @import '../../assets/my-theme/custom.less';
-  .forgetPassword-conatiner {
-    .forgetPassword-logo {
-      margin-top: 20px;
-      margin-bottom: 50px;
-      color: #D3D3D3;
-      cursor: default;
-    }
-    input {
-      margin-bottom: 16px;
-    }
-    .forgetPassword-btn {
-      background-color: #1E1E21;
-    }
-    p {
-      padding: 10px 0;
-      font-size: 14px;
-    }
-    .forgetPassword-text {
-      margin: 50px 0;
-    }
-    a {
-      font-size: 14px;
-      color: #C0C0C0;
-      transition: color 0.2s ease-in-out;
-      cursor: pointer;
-      &:hover {
-        color: #7193D9;
-      }
-    }
-  }
-
-  .ivu-input {
-    border: none;
-  }
-
-  .ivu-input:hover {
-    border: none;
-    background-color: #131414;
-  }
-
-  .ivu-input:focus {
-    background: #131414;
-  }
-
-  .ivu-icon.ivu-icon-android-map {
-    margin-right: 10px;
-  }
-
-  .ivu-input-group {
-    margin-bottom: 12px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .ivu-input-group-append {
-    background-color: #1E1E21
-  }
+<style lang="less" scoped>
+@import './ForgetPassword.less';
 </style>
