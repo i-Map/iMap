@@ -33,8 +33,6 @@
 
 <script>
 import tool from '@/tool/index.js'
-import ajax from '@/server/ajax.js'
-import url from '@/server/url.js'
 
 export default {
   name: "Register",
@@ -52,9 +50,7 @@ export default {
 
   methods: {
     goLogin() {
-      this.$router.push({
-        name: 'Login'
-      })
+      this.$router.push({ path: '/auth/login' })
     },
     register() {
       if (!this.model.username) {
@@ -66,13 +62,17 @@ export default {
       } else if (!tool.judgePassword(this.model.password)) {
         this.$Message.warning(this.$i18n.messages[this.$i18n.locale].m.message.register_password)
       } else {
-        this.registerLoading = true
-        ajax.post({
-          url: url.REGISTER,
+        this.$Spin.show({
+          render: (h) => {
+            return h('div', this.$i18n.messages[this.$i18n.locale].m.message.loading)
+          }
+        }, this)
+
+        this.$http.post({
+          url: this.$url.REGISTER,
           data: this.model
         }).then(data => {
-          this.registerLoading = false
-          if(data.code === 0) this.$router.push({ name: 'Login' })
+          if(data.code === 0) this.$router.push({ path: '/auth/login' })
         })
       }
     }
