@@ -20,8 +20,8 @@ export const m = {
     login: '立即登录'
   },
 
-  // forgetPassword
-  forgetPassword: {
+  // reset
+  reset: {
     input_email: '请输入邮箱',
     submit: '发送邮件',
     login: '立即登录'
@@ -35,7 +35,7 @@ export const m = {
     register_username: '请输入昵称',
     register_password: '请按标准输入密码',
     register_repassword: '两次密码须一致',
-    forgetPassword_email: '请输入正确的邮箱地址',
+    reset_email: '请输入正确的邮箱地址',
     welcome: '欢迎您使用 iMap , 想进一步了解 iMap 请移步帮助文档',
     loading: '加载中...'
   }

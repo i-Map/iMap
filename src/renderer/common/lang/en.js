@@ -20,8 +20,8 @@ export const m = {
     login: 'Signin now'
   },
 
-  // forgetPassword
-  forgetPassword: {
+  // reset
+  reset: {
     input_email: 'Please input email address',
     submit: 'Sent email now',
     login: 'Signin now'
@@ -35,7 +35,7 @@ export const m = {
     register_username: 'Please input nickname',
     register_password: 'Password should under the rule',
     register_repassword: 'Twice password should be the same',
-    forgetPassword_email: 'Please use correct email address',
+    reset_email: 'Please use correct email address',
     welcome: 'Welcome to iMap, if you want to know more, please move to the help documentation',
     loading: 'Loading...'
   }

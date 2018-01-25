@@ -25,9 +25,9 @@ const router = new Router({
           name: 'Register',
           component: resolve => require(['@/components/Page/Register'], resolve)
         }, {
-          path: '/auth/forgetPassword',
-          name: 'ForgetPassword',
-          component: resolve => require(['@/components/Page/ForgetPassword'], resolve)
+          path: '/auth/reset',
+          name: 'Reset',
+          component: resolve => require(['@/components/Page/Reset'], resolve)
         }
       ]
     }, {

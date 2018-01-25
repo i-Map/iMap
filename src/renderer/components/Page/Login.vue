@@ -55,15 +55,11 @@ export default {
     }),
 
     goForgetPassword() {
-      this.$router.push({
-        name: 'ForgetPassword'
-      })
+      this.$router.push({ path: '/auth/reset' })
     },
 
     goRegister() {
-      this.$router.push({
-        name: 'Register'
-      })
+      this.$router.push({ path: '/auth/register' })
     },
 
     login() {
@@ -77,6 +73,7 @@ export default {
             return h('div', this.$i18n.messages[this.$i18n.locale].m.message.loading)
           }
         }, this)
+
         this.$http.post({
           url: this.$url.LOGIN_EMAIL,
           data: this.model
@@ -91,7 +88,7 @@ export default {
             storage.set('userInfo', data.data.userInfo)
             this.setUserInfo(data.data.userInfo)
             this.$router.push({
-              name: 'Home'
+              path: 'Home'
             })
           }
         })

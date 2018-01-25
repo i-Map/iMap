@@ -1,16 +1,16 @@
 <template lang="html">
-  <div class="forgetPassword-container" @keydown.enter="forgetPassword">
+  <div class="reset-container" @keydown.enter="reset">
     <div class="form-group has-feedback animated fadeInDown">
-      <input class="form-control" type="text" v-model="model.email" :placeholder="$t('m.forgetPassword.input_email')">
+      <input class="form-control" type="text" v-model="model.email" :placeholder="$t('m.reset.input_email')">
       <span class="form-control-feedback fui-mail"></span>
     </div>
 
-    <button class="form-group btn btn-info animated fadeInDown" @click="forgetPassword">
-      {{ $t("m.forgetPassword.submit") }}
+    <button class="form-group btn btn-info animated fadeInDown" @click="reset">
+      {{ $t("m.reset.submit") }}
     </button>
 
     <a class="link animated fadeInDown" @click="goLogin">
-      {{ $t("m.forgetPassword.login") }}
+      {{ $t("m.reset.login") }}
     </a>
   </div>
 </template>
@@ -20,7 +20,7 @@
 import tool from '@/tool/index.js'
 
 export default {
-  name: "ForgetPassword",
+  name: "Reset",
 
   data() {
     return {
@@ -31,9 +31,9 @@ export default {
   },
 
   methods: {
-    forgetPassword() {
+    reset() {
       if (!tool.judgeEmail(this.model.email)) {
-        this.$Message.warning(this.$i18n.messages[this.$i18n.locale].m.message.forgetPassword_email)
+        this.$Message.warning(this.$i18n.messages[this.$i18n.locale].m.message.reset_email)
       } else {
         this.$Spin.show({
           render: (h) => {
@@ -58,5 +58,5 @@ export default {
 
 
 <style lang="less" scoped>
-@import './ForgetPassword.less';
+@import './Reset.less';
 </style>
