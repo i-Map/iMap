@@ -1,49 +1,69 @@
-import * as types from './mutations_types'
+import ajax from '../server/ajax'
+import url from '../server/url'
 
-/**
- * 保存用户信息
- * @param {Object} data
- */
-export const setUserInfo = ({ commit }, data) => {
-    commit(types.SET_USER_INFO, data)
-}
+// /**
+//  * 保存用户信息
+//  * @param {Object} data
+//  */
+// export const setUser = ({ commit }, data) => {
+//     commit(types.SET_USER, data)
+// }
 
-/**
- * 保存语言
- * @param {Object} data
- */
-export const setLang = ({ commit }, data) => {
-    commit(types.SET_LANG, data)
-}
+// /**
+//  * 保存语言
+//  * @param {Object} data
+//  */
+// export const setLang = ({ commit }, data) => {
+//     commit(types.SET_LANG, data)
+// }
 
-/**
- * 保存Excel数据
- * @param {Object} data
- */
-export const setExcelData = ({ commit }, data) => {
-    commit(types.SET_EXCEL_DATA, data)
-}
+export default {
+	SWITCH_LANG: ({ commit, dispatch }, { lang }) => {
+		commit('SWITCH_LANG', { lang })
+	},
 
-/**
- * 添加Excel数据
- * @param {Array} data
- */
-export const addExcelData = ({ commit }, data) => {
-    commit(types.ADD_EXCEL_DATA, data)
-}
+	LOGIN: ({ commit, dispatch }, { model }) => {
+    return ajax.post({
+      url: url.LOGIN,
+      data: model
+    }).then(data => {
+			commit('SET_USER', {
+				user: data.data.user,
+				accessToken: data.data.accessToken,
+				oauth: data.data.oauth
+			})
+    })
+	},
 
-/**
- * 修改Excel数据
- * @param {Array} data
- */
-export const editExcelData = ({ commit }, data) => {
-    commit(types.EDIT_EXCEL_DATA, data)
-}
+	LOGIN_GITHUB: ({ commit, dispatch }, { code }) => {
+    return ajax.get({
+      url: url.LOGIN_GITHUB,
+      data: {
+				code: code
+			}
+    }).then(data => {
+			commit('SET_USER', {
+				user: data.data.user,
+				accessToken: data.data.accessToken,
+				oauth: data.data.oauth
+			})
+			commit('SET_GITHUB', {
+				github: data.data.github,
+			})
+    })
+	},
 
-/**
- * 删除Excel数据
- * @param {Array} data
- */
-export const delExcelData = ({ commit }, data) => {
-    commit(types.DEL_EXCEL_DATA, data)
+	RESET: ({ commit, dispatch }, { model }) => {
+    return ajax.post({
+      url: url.RESET,
+      data: model
+    })
+	},
+
+	REGISTER: ({ commit, dispatch }, { model }) => {
+    return ajax.post({
+      url: url.REGISTER,
+      data: model
+    })
+	},
 }

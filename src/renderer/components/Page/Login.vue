@@ -31,7 +31,6 @@
 
 
 <script>
-import { mapActions } from 'vuex'
 import tool from '@/tool/index.js'
 import storage from 'store'
 
@@ -41,7 +40,7 @@ export default {
   data() {
     return {
       loading: false,
-      useGithubLogin: storage.get('useGithubLogin') || false,
+      useGithubLogin: storage.get('GITHUB_LOGIN') || false,
       model: {
         email: '',
         password: ''
@@ -50,10 +49,6 @@ export default {
   },
 
   methods: {
-    ...mapActions({
-      setUserInfo: 'setUserInfo'
-    }),
-
     goForgetPassword() {
       this.$router.push({ path: '/auth/reset' })
     },
@@ -74,24 +69,9 @@ export default {
           }
         }, this)
 
-        this.$http.post({
-          url: this.$url.LOGIN_EMAIL,
-          data: this.model
-        }).then(data => {
-          if(data.code === 0) {
-            new window.Notification('iMap', {
-              body: this.$i18n.messages[this.$i18n.locale].m.message.welcome,
-              silent: true
-            })
-            storage.set('accessToken', data.data.accessToken)
-            storage.set('userId', data.data.userId)
-            storage.set('userInfo', data.data.userInfo)
-            this.setUserInfo(data.data.userInfo)
-            this.$router.push({
-              path: 'Home'
-            })
-          }
-        })
+        this.$store.dispatch('LOGIN', {
+          model: this.model
+        }).then(() => this.$router.push({ path: '/auth/login'} ))
       }
     },
 
@@ -103,7 +83,7 @@ export default {
     },
 
     githubLogin() {
-      storage.set('useGithubLogin', true)
+      storage.set('GITHUB_LOGIN', true)
       window.location.href = 'https://github.com/login/oauth/authorize?client_id=aade15b52a338bad73c5&redirect_uri=http://localhost:9080/#/auth/login'
     }
   },
@@ -117,18 +97,9 @@ export default {
         }
       }, this)
 
-      this.$http.get({
-        url: this.$url.LOGIN_GITHUB,
-        headers: {
-          'Accept-Language': this.$i18n.locale
-        },
-        data: {
-          code: code
-        }
-      }).then(data => {
-        storage.set('useGithubLogin', false)
-        console.log(data)
-      })
+      this.$store.dispatch('LOGIN_GITHUB', {
+        code: code
+      }).then(() => this.$router.push({ path: '/auth/login'} ))
     }
   }
 }

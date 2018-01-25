@@ -41,12 +41,9 @@ export default {
           }
         }, this)
 
-        this.$http.post({
-          url: this.$url.FORGETPASSWORD,
-          data: this.model
-        }).then(() => {
-          this.$router.push({ path: '/auth/login' })
-        })
+        this.$store.dispatch('RESET', {
+          model: this.model
+        }).then(() => this.$router.push({ path: '/auth/login' }))
       }
     },
     goLogin() {

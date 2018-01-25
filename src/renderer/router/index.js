@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import storage from 'store'
+import * as Cookies from 'js-cookie'
 
 Vue.use(Router)
 
@@ -54,7 +54,8 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  let token = storage.get('accessToken')
+  let token = Cookies.get('ACCESSTOKEN')
+
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!token) {
       next({

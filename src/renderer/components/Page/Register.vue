@@ -68,12 +68,9 @@ export default {
           }
         }, this)
 
-        this.$http.post({
-          url: this.$url.REGISTER,
-          data: this.model
-        }).then(data => {
-          if(data.code === 0) this.$router.push({ path: '/auth/login' })
-        })
+        this.$store.dispatch('REGISTER', {
+          model: this.model
+        }).then(() => this.$router.push({ path: '/auth/login' }))
       }
     }
   }

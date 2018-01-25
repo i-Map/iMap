@@ -16,7 +16,7 @@ export default {
         url: obj.url,
         data: obj.data,
         headers: {
-          'Accept-Language': storage.get('lang') || 'zh-CN'
+          'Accept-Language': storage.get('LANG') || 'zh-CN'
         }
       }).then(data => {
         Message.success(data.data.msg)
@@ -37,7 +37,7 @@ export default {
         url: obj.url,
         params: obj.data,
         headers: {
-          'Accept-Language': storage.get('lang') || 'zh-CN'
+          'Accept-Language': storage.get('LANG') || 'zh-CN'
         }
       }).then(data => {
         Message.success(data.data.msg)

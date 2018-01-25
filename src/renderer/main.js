@@ -12,8 +12,6 @@ import '@/filter/index.js'
 import 'iview/dist/styles/iview.css'
 import '@/assets/lib/css/vendor/bootstrap/css/bootstrap.min.css'
 import '@/assets/lib/css/flat-ui.min.css'
-// import '@/assets/my-theme/dist/iview.css'
-
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.config.productionTip = false
@@ -23,7 +21,7 @@ Vue.use(storage)
 Vue.component('Spin', Spin)
 
 const i18n = new VueI18n({
-  locale: storage.get('lang') || 'zh-CN',
+  locale: storage.get('LANG') || 'zh-CN',
   messages: {
     'zh-CN': require('@/common/lang/zh'),
     'en-US': require('@/common/lang/en')
@@ -32,8 +30,6 @@ const i18n = new VueI18n({
 
 Vue.prototype.$Message = Message
 Vue.prototype.$Spin = Spin
-Vue.prototype.$http = ajax
-Vue.prototype.$url = url
 
 /* eslint-disable no-new */
 new Vue({
