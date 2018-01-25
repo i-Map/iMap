@@ -1,7 +1,6 @@
 .DS_Store
 .vscode
-dist/electron/*
-dist/web/*
+dist
 build/*
 !build/icons
 node_modules/
