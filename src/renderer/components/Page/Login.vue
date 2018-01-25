@@ -71,7 +71,7 @@ export default {
 
         this.$store.dispatch('LOGIN', {
           model: this.model
-        }).then(() => this.$router.push({ path: '/auth/login'} ))
+        }).then(() => this.$router.push({ path: '/' }))
       }
     },
 
@@ -99,7 +99,7 @@ export default {
 
       this.$store.dispatch('LOGIN_GITHUB', {
         code: code
-      }).then(() => this.$router.push({ path: '/auth/login'} ))
+      }).then(() => this.$router.push({ path: '/' }))
     }
   }
 }

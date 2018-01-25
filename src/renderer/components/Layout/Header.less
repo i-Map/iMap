@@ -1,0 +1,77 @@
+@import '../../assets/theme.less';
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 0;
+  z-index: 999;
+  &-header {
+    width: 10%;
+  }
+  &-brand {
+    cursor: default;
+    &:hover {
+      color: @imap-a;
+    }
+  }
+  &-nav {
+    width: 90%;
+  }
+  &-avatar {
+    float: right;
+    &:hover .dropdown-menu, &:focus .dropdown-menu {
+      display: block;
+    }
+    &__wrapper {
+      height: 53px;
+      cursor: pointer;
+      & > img {
+        margin: 6.5px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+      .dropdown-menu {
+        &:hover {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.fadeInDown {
+  animation-name: fadeInDown;
+}
+
+.animated {
+  animation-duration: .4s;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: .4;
+    transform: translate3d(0%,-5%,0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// 覆盖 Flat UI 样式
+.dropdown-menu {
+  top: 83.5%;
+  left: -82px;
+}
+
+.dropdown-menu, .select2-drop {
+  min-width: 170px;
+}
+
+.dropdown-menu-inverse>li>a:hover, .dropdown-menu-inverse>li>a:focus {
+    background-color: @imap-a_hover;
+}

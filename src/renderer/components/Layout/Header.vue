@@ -1,69 +1,59 @@
 <template lang="html">
-  <Menu mode="horizontal" theme="primary" :active-name="activeName" @on-select="onSelect">
-    <span class="header-userName">{{ userAccount }}</span>
-    <Submenu name="3">
-        <template slot="title">
-            <Icon type="ios-person"></Icon>
-            个人中心
-        </template>
-        <MenuGroup title="使用">
-            <MenuItem name="3-1">我的项目</MenuItem>
-            <MenuItem name="3-2">帮助文档</MenuItem>
-        </MenuGroup>
-        <MenuGroup title="操作">
-            <MenuItem name="3-3">登出</MenuItem>
-        </MenuGroup>
-    </Submenu>
-    <MenuItem name="2">
-        <Icon type="stats-bars"></Icon>
-        地图库
-    </MenuItem>
-    <MenuItem name="1">
-        <Icon type="plus"></Icon>
-        新地图
-    </MenuItem>
-  </Menu>
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+      <a class="navbar-brand">iMap</a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li :class="activeItem === '/' || activeItem === '/map/write' ? 'active' : ''">
+          <a href="#fakelink">{{ $t('m.header.make_map') }}</a>
+        </li>
+
+        <li :class="activeItem === '/log/write' ? 'active' : ''">
+          <a href="#fakelink">{{ $t('m.header.write_travelogue') }}</a>
+        </li>
+
+        <li class="navbar-avatar">
+            <div class="navbar-avatar__wrapper">
+              <img :src="avatar">
+              <ul class="dropdown-menu dropdown-menu-inverse animated fadeInDown" role="menu">
+                <li><a href="#">{{ $t('m.header.account_setting') }}</a></li>
+                <li><a href="#">{{ $t('m.header.history_Footprint') }}</a></li>
+                <li><a href="#">{{ $t('m.header.travel_log') }}</a></li>
+                <li class="divider"></li>
+                <li><a @click="logout">{{ $t('m.header.logout') }}</a></li>
+              </ul>
+            </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </template>
 
 
 <script>
-import storage from 'store'
-import { mapState } from 'vuex'
+import avatorDefault from '@/assets/img/avatar-defalut.png'
+
 export default {
   name: "Header",
-  props: {
-    activeName: {
-      type: String,
-      default: '1'
+
+  computed: {
+    activeItem() {
+      return this.$route.fullPath
     }
   },
+
   data() {
     return {
+      avatar: avatorDefault
     }
   },
-  computed: mapState({
-    userAccount: state => state.userInfo.userInfo.email || storage.get('userInfo').email,
-    countAlias: 'userAccount'
-  }),
+
   methods: {
-    onSelect(value) {
-      if(value === '1')
-        this.$router.push({ name: 'Home' })
-      if(value === '2')
-        this.$router.push({ name: 'Map' })
-      if(value === '3-1')
-        this.$router.push({ name: 'MyProject'})
-      if(value === '3-2')
-        this.$router.push({ name: 'Help' })
-      if(value === '3-3') {
-        this.$Message.success('登出成功,再见👋')
-        storage.remove('userInfo')
-        storage.remove('userId')
-        storage.remove('accessToken')
-        this.$router.push({
-          name: 'Login'
-        })
-      }
+    logout() {
+      this.$store.dispatch('LOGOUT')
+        .then(() => this.$router.push({ path: '/auth/login' }))
     }
   }
 }
@@ -71,10 +61,5 @@ export default {
 
 
 <style lang="less" scoped>
-// @import '../../assets/my-theme/custom.less';
-  .header-userName {
-    padding: 0 20px;
-    font-weight: 600;
-    cursor: default;
-  }
+@import './Header.less';
 </style>

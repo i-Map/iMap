@@ -19,6 +19,16 @@ export default {
     storage.set('OAUTH', oauth)
   },
 
+  REMOVE_USER: (state) => {
+    state.USER = {}
+    state.GITHUB = {}
+
+    Cookies.remove('ACCESSTOKEN'),
+    storage.remove('USER')
+    storage.remove('OAUTH')
+    storage.remove('GITHUB')
+  },
+
   SET_GITHUB: (state, { github }) => {
     state.GITHUB = github
 

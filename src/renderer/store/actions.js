@@ -66,4 +66,8 @@ export default {
       data: model
     })
 	},
+
+	LOGOUT: ({ commit, dispatch }) => {
+		commit('REMOVE_USER')
+	}
 }

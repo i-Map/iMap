@@ -27,6 +27,16 @@ export const m = {
     login: '立即登录'
   },
 
+  // header.vue
+  header: {
+    account_setting: '账号设置',
+    history_Footprint: '历史足迹',
+    travel_log: '旅行日志',
+    logout: '退出登录',
+    make_map: '制作地图',
+    write_travelogue: '撰写游记'
+  },
+
   // message
   message: {
     login_email: '请输入正确的邮箱地址',

@@ -27,6 +27,16 @@ export const m = {
     login: 'Signin now'
   },
 
+  // header.vue
+  header: {
+    account_setting: 'Account',
+    history_Footprint: 'Footprint',
+    travel_log: 'Travel log',
+    logout: 'Signout',
+    make_map: 'MAKE MAPS',
+    write_travelogue: 'WRITE TRAVELOGUE'
+  },
+
   // message
   message: {
     login_email: 'Please use correct email address',
