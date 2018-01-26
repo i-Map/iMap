@@ -1,0 +1,20 @@
+export default [
+  'GAI',
+  'Anor.Z',
+  'Vava',
+  'Simba',
+  'Yamy',
+  'TT',
+  'wiLL.D',
+  'Jony J',
+  'BCW',
+  'BrAnT.B',
+  'Cola',
+  'Bridge',
+  'HipHopMan',
+  'LongS',
+  'EO',
+  '2UNCLE',
+  'DK',
+  'PGone'
+]

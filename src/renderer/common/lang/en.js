@@ -27,7 +27,7 @@ export const m = {
     login: 'Signin now'
   },
 
-  // header.vue
+  // Header.vue
   header: {
     account_setting: 'Account',
     history_Footprint: 'Footprint',
@@ -35,6 +35,33 @@ export const m = {
     logout: 'Signout',
     make_map: 'MAKE MAPS',
     write_travelogue: 'WRITE TRAVELOGUE'
+  },
+
+  // Account.vue
+  account: {
+    change_avatar: 'Change avatar',
+    tool_box: {
+      basic_setting: 'Basic',
+      map_config: 'Map',
+      travelogue_config: 'Travelogue',
+      about: 'About'
+    },
+    basic_setting: {
+      update_email_title: 'Update email',
+      empty_email: 'No email',
+      update_email: 'Please input email address',
+      update_reemail: 'Please check email address',
+      update_password_title: 'Update password',
+      update_password: 'Send reset email',
+      submit: 'Submit',
+      switch_language: 'Switch language'
+    },
+    about: {
+      check_update: 'Check update',
+      submit: 'Check now',
+      home: 'Home page',
+      author: 'Author'
+    }
   },
 
   // message
@@ -46,6 +73,8 @@ export const m = {
     register_password: 'Password should under the rule',
     register_repassword: 'Twice password should be the same',
     reset_email: 'Please use correct email address',
+    account_email: 'Please use correct email address',
+    account_reemail: 'Twice email should be the same',
     welcome: 'Welcome to iMap, if you want to know more, please move to the help documentation',
     loading: 'Loading...'
   }

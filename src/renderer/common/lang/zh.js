@@ -27,7 +27,7 @@ export const m = {
     login: '立即登录'
   },
 
-  // header.vue
+  // Header.vue
   header: {
     account_setting: '账号设置',
     history_Footprint: '历史足迹',
@@ -35,6 +35,33 @@ export const m = {
     logout: '退出登录',
     make_map: '制作地图',
     write_travelogue: '撰写游记'
+  },
+
+  // Account.vue
+  account: {
+    change_avatar: '更换头像',
+    tool_box: {
+      basic_setting: '基础设置',
+      map_config: '地图配置',
+      travelogue_config: '游记设置',
+      about: '关于'
+    },
+    basic_setting: {
+      update_email_title: '更新邮箱',
+      empty_email: '暂无邮箱',
+      update_email: '请输入邮箱',
+      update_reemail: '请确认邮箱',
+      update_password_title: '更新密码',
+      update_password: '发送重置邮件',
+      submit: '提交',
+      switch_language: '切换语言'
+    },
+    about: {
+      check_update: '检查更新',
+      submit: '立即检查',
+      home: '官网',
+      author: '作者'
+    }
   },
 
   // message
@@ -46,6 +73,8 @@ export const m = {
     register_password: '请按标准输入密码',
     register_repassword: '两次密码须一致',
     reset_email: '请输入正确的邮箱地址',
+    account_email: '请输入正确的邮箱地址',
+    account_reemail: '两次邮箱地址须一致',
     welcome: '欢迎您使用 iMap , 想进一步了解 iMap 请移步帮助文档',
     loading: '加载中...'
   }

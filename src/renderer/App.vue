@@ -11,30 +11,38 @@
 </script>
 
 <style lang="less">
-  #app {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #FFFEFF;
+@import './assets/theme.less';
+
+#app {
+  width: 100%;
+  min-height: 100vh;
+  background-color: @imap-bg;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+::-webkit-scrollbar {
+  display:none;
+}
+
+.fadeInDown {
+  animation-name: fadeInDown;
+}
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: .4;
+    transform: translate3d(0,-20%,0);
   }
 
-  .fadeInDown {
-    animation-name: fadeInDown;
+  100% {
+    opacity: 1;
+    transform: none;
   }
-
-  .animated {
-    animation-duration: 1s;
-    animation-fill-mode: both;
-  }
-
-  @keyframes fadeInDown {
-    0% {
-      opacity: .4;
-      transform: translate3d(0,-20%,0);
-    }
-
-    100% {
-      opacity: 1;
-      transform: none;
-    }
-  }
+}
 </style>

@@ -1,7 +1,8 @@
 <template lang="html">
-  <div>
+  <div class="home">
     <imap-header></imap-header>
-    <section class="home-container">
+    <router-view class="home-item__view container-fluid"></router-view>
+    <!-- <section class="home-container">
       <div class="panel home-container--item">
         <div class="panel-l panel-item">
           <Icon class="icon-red" type="document-text"></Icon>
@@ -47,7 +48,7 @@
       <div slot="footer">
       </div>
     </Modal>
-    <imap-addpointmodal v-model="showAddPointModal"></imap-addpointmodal>
+    <imap-addpointmodal v-model="showAddPointModal"></imap-addpointmodal> -->
   </div>
 </template>
 
@@ -156,125 +157,138 @@ import url from '@/server/url.js'
 
 <style lang="less" scoped>
   // @import '../../assets/my-theme/custom.less';
-  .home-container {
-    margin-left: 30px;
-    margin-right: 30px;
-    cursor: default;
-  }
+  // .home-container {
+  //   margin-left: 30px;
+  //   margin-right: 30px;
+  //   cursor: default;
+  // }
 
-  .panel {
-    margin: 0 auto;
-    width: 900px;
-    height: 160px;
-    background-color: #262629;
-    .icon-yellow {
-      float: left;
-      padding: 10px 20px;
-      color: #E3B841;
-      font-size: 36px;
+  // .panel {
+  //   margin: 0 auto;
+  //   width: 900px;
+  //   height: 160px;
+  //   background-color: #262629;
+  //   .icon-yellow {
+  //     float: left;
+  //     padding: 10px 20px;
+  //     color: #E3B841;
+  //     font-size: 36px;
+  //   }
+  //   & > h3 {
+  //     padding-top: 12px;
+  //     font-size: 20px;
+  //     font-weight: 500;
+  //   }
+  //   .tip-conatiner {
+  //     margin-top: 8px;
+  //     text-align: left;
+  //     padding: 4px 20px 10px 72px;
+  //     & > span {
+  //       line-height: 30px;
+  //       font-size: 14px;
+  //       font-weight: 400;
+  //     }
+  //   }
+  // }
+
+  // .panel.home-container--item {
+  //   margin-top: 66px;
+  // }
+
+  // .home-container--item {
+  //   margin-bottom: 20px;
+  //   min-width: 940px;
+  //   height: 200px;
+  //   background-color: #302F33;
+  //   .panel-item {
+  //     display: inline-block;
+  //     .icon-red {
+  //       float: left;
+  //       padding: 10px 20px;
+  //       color: #A33F29;
+  //       font-size: 78px;
+  //     }
+  //     .title {
+  //       padding-top: 14px;
+  //       padding-bottom: 6px;
+  //       font-size: 18px;
+  //       font-weight: 500;
+  //     }
+  //   }
+  //   .panel-l {
+  //     margin-left: 20px;
+  //     width: 420px;
+  //     height: 100%;
+  //     background-color: #262629;
+  //   }
+
+  //   .panel-r {
+  //     margin-right: 20px;
+  //     float: right;
+  //     width: 420px;
+  //     height: 100%;
+  //     background-color: #262629;
+  //   }
+  // }
+
+  // .upload-xls, .makeChart-btn, .next-btn, .project-btn {
+  //   margin-top: 50px;
+  //   padding: 4px 40px;
+  //   position: relative;
+  //   display: inline-block;
+  //   line-height: 20px;
+  //   border: 1px solid #AD4B35;
+  //   border-radius: 4px;
+  //   background: #1D1C1F;
+  //   overflow: hidden;
+  //   color: #AD4B35;
+  //   text-decoration: none;
+  //   text-indent: 0;
+  //   transition: all .2s ease-in-out;
+  //   cursor: pointer;
+  //   & > input {
+  //     position: absolute;
+  //     left: 0;
+  //     top: 0;
+  //     width: 128px;
+  //     font-size: 100px;
+  //     opacity: 0;
+  //     cursor: pointer;
+  //   }
+  //   &:hover {
+  //     background: #0B0C0C;
+  //     text-decoration: none;
+  //     cursor: pointer;
+  //   }
+  // }
+
+  // .upload-xls {
+  //   padding: 4px 10px;
+  // }
+
+  // .next-btn {
+  //   margin-left: 10px;
+  //   padding: 4px 10px;
+  // }
+
+  // .project-btn {
+  //   margin-top: 12px;
+  // }
+
+  // .newProject-btn {
+  //   margin-top: 30px;
+  // }
+@import '../../assets/theme.less';
+
+.home {
+  &-item {
+    &__view {
+      padding: 5px;
+      margin: 63px 8px 8px 8px;
+      min-height: 489px;
+      border-radius: 4px;
+      background-color: @imap-panel_bg
     }
-    & > h3 {
-      padding-top: 12px;
-      font-size: 20px;
-      font-weight: 500;
-    }
-    .tip-conatiner {
-      margin-top: 8px;
-      text-align: left;
-      padding: 4px 20px 10px 72px;
-      & > span {
-        line-height: 30px;
-        font-size: 14px;
-        font-weight: 400;
-      }
-    }
   }
-
-  .panel.home-container--item {
-    margin-top: 66px;
-  }
-
-  .home-container--item {
-    margin-bottom: 20px;
-    min-width: 940px;
-    height: 200px;
-    background-color: #302F33;
-    .panel-item {
-      display: inline-block;
-      .icon-red {
-        float: left;
-        padding: 10px 20px;
-        color: #A33F29;
-        font-size: 78px;
-      }
-      .title {
-        padding-top: 14px;
-        padding-bottom: 6px;
-        font-size: 18px;
-        font-weight: 500;
-      }
-    }
-    .panel-l {
-      margin-left: 20px;
-      width: 420px;
-      height: 100%;
-      background-color: #262629;
-    }
-
-    .panel-r {
-      margin-right: 20px;
-      float: right;
-      width: 420px;
-      height: 100%;
-      background-color: #262629;
-    }
-  }
-
-  .upload-xls, .makeChart-btn, .next-btn, .project-btn {
-    margin-top: 50px;
-    padding: 4px 40px;
-    position: relative;
-    display: inline-block;
-    line-height: 20px;
-    border: 1px solid #AD4B35;
-    border-radius: 4px;
-    background: #1D1C1F;
-    overflow: hidden;
-    color: #AD4B35;
-    text-decoration: none;
-    text-indent: 0;
-    transition: all .2s ease-in-out;
-    cursor: pointer;
-    & > input {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 128px;
-      font-size: 100px;
-      opacity: 0;
-      cursor: pointer;
-    }
-    &:hover {
-      background: #0B0C0C;
-      text-decoration: none;
-      cursor: pointer;
-    }
-  }
-
-  .upload-xls {
-    padding: 4px 10px;
-  }
-
-  .next-btn {
-    margin-left: 10px;
-    padding: 4px 10px;
-  }
-
-  .project-btn {
-    margin-top: 12px;
-  }
-
-  .newProject-btn {
-    margin-top: 30px;
-  }
+}
 </style>

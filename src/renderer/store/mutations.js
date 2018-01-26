@@ -10,6 +10,7 @@ export default {
 
   SET_USER: (state, { user, accessToken, oauth }) => {
     state.USER = user
+    state.OAUTH = oauth
 
     Cookies.set('ACCESSTOKEN', accessToken, {
       expires: 1,

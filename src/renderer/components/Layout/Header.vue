@@ -18,7 +18,9 @@
             <div class="navbar-avatar__wrapper">
               <img :src="avatar">
               <ul class="dropdown-menu dropdown-menu-inverse animated fadeInDown" role="menu">
-                <li><a href="#">{{ $t('m.header.account_setting') }}</a></li>
+                <li>
+                  <router-link to="/account">{{ $t('m.header.account_setting') }}</router-link>
+                </li>
                 <li><a href="#">{{ $t('m.header.history_Footprint') }}</a></li>
                 <li><a href="#">{{ $t('m.header.travel_log') }}</a></li>
                 <li class="divider"></li>
@@ -33,7 +35,6 @@
 
 
 <script>
-import avatorDefault from '@/assets/img/avatar-defalut.png'
 
 export default {
   name: "Header",
@@ -46,7 +47,7 @@ export default {
 
   data() {
     return {
-      avatar: avatorDefault
+      avatar: this.$store.getters.getAvatar
     }
   },
 

@@ -17,3 +17,12 @@
     }
   }
 }
+
+// 覆盖 Flat UI 默认样式
+.form-control, .select2-search input[type=text] {
+  border: 2px solid #EDEEF1;
+  transition: .25s all;
+  &:focus {
+    border-color: @imap-a_hover;
+  }
+}

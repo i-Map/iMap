@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       logo,
-      localLang: storage.get('LANG') || 'zh-CN'
+      localLang: this.$i18n.locale
     }
   },
 
@@ -49,12 +49,12 @@ export default {
       this.$store.dispatch('SWITCH_LANG', {
         lang: this.localLang
       })
-    },
+    }
   }
 }
 </script>
 
 
-<style lang="less">
+<style lang="less" scoped>
 @import './Auth.less';
 </style>

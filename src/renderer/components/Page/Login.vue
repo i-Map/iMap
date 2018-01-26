@@ -44,7 +44,7 @@ export default {
       model: {
         email: '',
         password: ''
-      },
+      }
     }
   },
 

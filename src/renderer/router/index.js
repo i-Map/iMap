@@ -10,7 +10,26 @@ const router = new Router({
       path: '/',
       name: 'Home',
       component: resolve => require(['@/components/Page/Home'], resolve),
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true },
+      redirect: '/map/make',
+      children: [
+        {
+          path: '/account',
+          name: 'Account',
+          component: resolve => require(['@/components/Page/Account'], resolve)
+        }, {
+          path: '/map',
+          name: 'Map',
+          component: resolve => require(['@/components/Page/Map'], resolve),
+          children: [
+            {
+              path: '/map/make',
+              name: 'Map-make',
+              component: resolve => require(['@/components/Page/Map/Make'], resolve)
+            }
+          ]
+        }
+      ]
     }, {
       path: '/auth',
       name: 'Auth',
