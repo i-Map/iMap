@@ -44,7 +44,8 @@ export const m = {
       download_pdf: 'PDF',
       download_jpeg: 'JPEG',
       pre_empty: 'Whoops, there is nothing here...',
-      pre_title: 'Travelogue preview'
+      pre_title: 'Travelogue preview',
+      share_title: 'Share your travelogue !'
     }
   },
 
@@ -93,5 +94,13 @@ export const m = {
     welcome: 'Welcome to iMap, if you want to know more, please move to the help documentation',
     loading: 'Loading...',
     updating: 'Updating...'
+  },
+
+  // share
+  share: {
+    title: '🤓 My travelogue',
+    description: '👉🏻 This is my travels made on iMap 👈🏻',
+    quote: 'iMap is an amazing travel map tool',
+    hashtags: 'iMap,Share,Travelogue'
   }
 }

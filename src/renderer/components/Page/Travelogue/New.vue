@@ -11,36 +11,104 @@
     </div>
     <sweet-modal
       class="html-pre"
-      ref="modal"
+      ref="preModal"
       :title="this.$i18n.messages[this.$i18n.locale].m.travelogue.new.pre_title"
     >
       <div
-        v-html="markdownResource"
+        v-html="markdownResource || this.$i18n.messages[this.$i18n.locale].m.travelogue.new.pre_empty"
         class="html-pre__content"
       ></div>
       <button
+        v-if="markdownResource"
         slot="box-action"
         style="margin-right:10px;"
         class="btn btn-warning"
         @click="download('JPEG')">
         {{ $t('m.travelogue.new.download_jpeg') }}
       </button>
+
       <button
+        v-if="markdownResource"
         slot="box-action"
+        style="margin-right:10px;"
         class="btn btn-inverse"
         @click="download('PDF')">
         {{ $t('m.travelogue.new.download_pdf') }}
       </button>
+
+      <button
+        v-if="markdownResource"
+        slot="box-action"
+        class="btn btn-danger fui-link"
+        @click="$refs.shareModal.open()"
+      >
+      </button>
+    </sweet-modal>
+
+    <sweet-modal
+      ref="shareModal"
+      :title="this.$i18n.messages[this.$i18n.locale].m.travelogue.new.share_title"
+    >
+      <social-sharing url="https://trevor.top"
+        :title="this.$i18n.messages[this.$i18n.locale].m.share.title"
+        :description="this.$i18n.messages[this.$i18n.locale].m.share.description"
+        :quote="this.$i18n.messages[this.$i18n.locale].m.share.quote"
+        :hashtags="this.$i18n.messages[this.$i18n.locale].m.share.hashtags"
+        twitter-user="iMap"
+        inline-template>
+        <div style="text-align:center;">
+          <network network="email">
+            <button style="margin:0 2px;" class="btn btn-inverse fui-mail"></button>
+          </network>
+
+          <network network="linkedin">
+            <button style="margin:0 2px;background-color:#3273AF;" class="btn btn-default fui-linkedin"></button>
+          </network>
+
+          <network network="googleplus">
+            <button style="margin:0 2px;background-color:#E05742;" class="btn btn-default fui-google-plus"></button>
+          </network>
+
+          <network network="line">
+            <button style="margin:0 2px;background-color:#52B734;" class="btn btn-default iconfont icon-line"></button>
+          </network>
+
+          <network network="skype">
+            <button style="margin:0 2px;background-color:#4EACED;" class="btn btn-default fui-skype"></button>
+          </network>
+
+          <network network="weibo">
+            <button style="margin:0 2px;background-color:#CE3335;" class="btn btn-default iconfont icon-weibo"></button>
+          </network>
+
+          <network network="facebook">
+            <button style="margin:0 2px;background-color:#415793;" class="btn btn-default fui-facebook"></button>
+          </network>
+
+          <network network="whatsapp">
+            <button style="margin:0 2px;background-color:#83F07E;" class="btn btn-default iconfont icon-whatsapp"></button>
+          </network>
+
+          <network network="reddit">
+            <button style="margin:0 2px;background-color:#EB502F;" class="btn btn-default iconfont icon-reddit"></button>
+          </network>
+
+          <network network="twitter">
+            <button style="margin:0 2px;background-color:#4C9EEC;" class="btn btn-default fui-twitter"></button>
+          </network>
+        </div>
+      </social-sharing>
     </sweet-modal>
   </div>
 </template>
 
 
 <script>
+import SocialSharing from 'vue-social-sharing'
 import marked from 'marked'
 import html2canvas from 'html2canvas'
 import JsPDF from 'jspdf'
-import { SweetModal, SweetButton } from 'sweet-modal-vue'
+import { SweetModal } from 'sweet-modal-vue'
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 
@@ -87,8 +155,9 @@ export default {
   },
 
   components: {
+    mavonEditor,
     sweetModal: SweetModal,
-    mavonEditor
+    socialSharing: SocialSharing
   },
 
   methods: {
@@ -96,11 +165,9 @@ export default {
       if (data.trim()) {
         // 直接节点克隆导致 canvas 转图片错位
         this.markdownResource = marked(data)
-        this.$refs.modal.open()
-      } else {
-        this.markdownResource = this.$i18n.messages[this.$i18n.locale].m.travelogue.new.pre_empty
-        this.$refs.modal.open()
       }
+
+      this.$refs.preModal.open()
     },
     getFilename(type) {
       return 'travelogue_' + (new Date()).getTime() + '.' + type

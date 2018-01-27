@@ -44,7 +44,8 @@ export const m = {
       download_pdf: 'PDF',
       download_jpeg: 'JPEG',
       pre_empty: '啊哦，这儿什么都没有...',
-      pre_title: '游记预览'
+      pre_title: '游记预览',
+      share_title: '分享你的游记 ！'
     }
   },
 
@@ -93,5 +94,13 @@ export const m = {
     welcome: '欢迎您使用 iMap , 想进一步了解 iMap 请移步帮助文档',
     loading: '加载中...',
     updating: '更新中...'
+  },
+
+  // share
+  share: {
+    title: '🤓 我的游记',
+    description: '👉 我在 iMap 上面制作了一份游记 👈',
+    quote: 'iMap 是一个旅行地图生成工具',
+    hashtags: 'iMap,分享,游记'
   }
 }
