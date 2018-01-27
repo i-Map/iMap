@@ -53,4 +53,18 @@ ol {
 ul > li {
   list-style: disc;
 }
+
+.html-pre {
+  &__content {
+    img {
+      max-width: 560px;
+    }
+  }
+}
+
+.sweet-title {
+  & > h2 {
+    line-height: 64px
+  }
+}
 </style>

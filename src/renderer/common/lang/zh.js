@@ -40,7 +40,11 @@ export const m = {
   // travelogue
   travelogue: {
     new: {
-      placeholder: '开启新的篇章...'
+      placeholder: '开启新的篇章...',
+      download_pdf: 'PDF',
+      download_jpeg: 'JPEG',
+      pre_empty: '啊哦，这儿什么都没有...',
+      pre_title: '游记预览'
     }
   },
 

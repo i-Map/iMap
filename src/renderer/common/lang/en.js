@@ -40,7 +40,11 @@ export const m = {
   // travelogue
   travelogue: {
     new: {
-      placeholder: 'Starting a new travelogue...'
+      placeholder: 'Starting a new travelogue...',
+      download_pdf: 'PDF',
+      download_jpeg: 'JPEG',
+      pre_empty: 'Whoops, there is nothing here...',
+      pre_title: 'Travelogue preview'
     }
   },
 

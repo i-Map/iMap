@@ -9,11 +9,38 @@
         @save="onSave"
       ></mavon-editor>
     </div>
+    <sweet-modal
+      class="html-pre"
+      ref="modal"
+      :title="this.$i18n.messages[this.$i18n.locale].m.travelogue.new.pre_title"
+    >
+      <div
+        v-html="markdownResource"
+        class="html-pre__content"
+      ></div>
+      <button
+        slot="box-action"
+        style="margin-right:10px;"
+        class="btn btn-warning"
+        @click="download('JPEG')">
+        {{ $t('m.travelogue.new.download_jpeg') }}
+      </button>
+      <button
+        slot="box-action"
+        class="btn btn-inverse"
+        @click="download('PDF')">
+        {{ $t('m.travelogue.new.download_pdf') }}
+      </button>
+    </sweet-modal>
   </div>
 </template>
 
 
 <script>
+import marked from 'marked'
+import html2canvas from 'html2canvas'
+import JsPDF from 'jspdf'
+import { SweetModal, SweetButton } from 'sweet-modal-vue'
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 
@@ -54,17 +81,75 @@ export default {
         alignright: true, // 右对齐
         subfield: false, // 单双栏模式
         preview: true, // 预览
-      }
+      },
+      markdownResource: ''
     }
   },
 
   components: {
+    sweetModal: SweetModal,
     mavonEditor
   },
 
   methods: {
-    onSave(file) {
-      console.log(file)
+    onSave(data) {
+      if (data.trim()) {
+        // 直接节点克隆导致 canvas 转图片错位
+        this.markdownResource = marked(data)
+        this.$refs.modal.open()
+      } else {
+        this.markdownResource = this.$i18n.messages[this.$i18n.locale].m.travelogue.new.pre_empty
+        this.$refs.modal.open()
+      }
+    },
+    getFilename(type) {
+      return 'travelogue_' + (new Date()).getTime() + '.' + type
+    },
+    download(type) {
+      let pdfDom = document.querySelector('.html-pre__content')
+
+      html2canvas(pdfDom, {
+        dpi: window.devicePixelRatio,
+        useCORS: true
+      }).then(canvas => {
+        let contentWidth  = canvas.width
+        let contentHeight = canvas.height
+        let pageHeight    = contentWidth / 592.28 * 841.89
+        let leftHeight    = contentHeight
+        let position      = 0
+        let imgWidth      = 595.28
+        let imgHeight     = 592.28 / contentWidth * contentHeight
+
+        if (type === 'JPEG') {
+          let img = document.createElement('a')
+          img.href = canvas.toDataURL('image/jpeg').replace("image/jpeg", "image/octet-stream")
+          img.download = this.getFilename('jpg')
+          img.click()
+        }
+
+        if (type === 'PDF') {
+          let pageData = canvas.toDataURL('image/jpeg', 1.0)
+          let PDF = new JsPDF('', 'pt', 'a4')
+
+          if (leftHeight < pageHeight) {
+            PDF.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight)
+          } else {
+            while (leftHeight > 0) {
+              PDF.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+              leftHeight -= pageHeight
+              position -= 841.89
+
+              if (leftHeight > 0) {
+                PDF.addPage()
+              }
+
+            }
+          }
+
+          let filename = this.getFilename('pdf')
+          PDF.save(filename)
+        }
+      })
     }
   }
 }
@@ -72,6 +157,8 @@ export default {
 
 
 <style lang="less" scoped>
+@import '../../../assets/theme.less';
+
 .travelogue-new {
   overflow: auto;
   .editor {
@@ -80,6 +167,16 @@ export default {
       height: 100%;
       z-index: 1;
     }
+  }
+}
+
+.html-pre {
+  overflow: auto;
+  &__content {
+    width: inherit;
+    text-align: left;
+    padding: 14px;
+    overflow: hidden;
   }
 }
 </style>
