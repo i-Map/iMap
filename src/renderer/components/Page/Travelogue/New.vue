@@ -1,45 +1,73 @@
 <template lang="html">
   <div class="travelogue-new">
     <div class="editor">
+      <input
+        type="text"
+        class="editor-title form-control input-sm"
+        v-model="travelogueModel.title"
+        :placeholder="this.$i18n.messages[this.$i18n.locale].m.travelogue.new.title"
+      />
       <mavon-editor
         class="editor-item"
+        ref=md
+        @imgAdd="$imgAdd"
         :language="editorLanguage"
         :placeholder="editorPlacegolder"
         :toolbars="editorConfig"
         @save="onSave"
       ></mavon-editor>
     </div>
+
     <sweet-modal
       class="html-pre"
       ref="preModal"
       :title="this.$i18n.messages[this.$i18n.locale].m.travelogue.new.pre_title"
     >
       <div
-        v-html="markdownResource || this.$i18n.messages[this.$i18n.locale].m.travelogue.new.pre_empty"
+        v-html="travelogueModel.markdownResource || this.$i18n.messages[this.$i18n.locale].m.travelogue.new.pre_empty"
         class="html-pre__content"
       ></div>
+
       <button
-        v-if="markdownResource"
+        v-if="travelogueModel.markdownResource"
+        slot="box-action"
+        style="margin-right:10px;"
+        class="btn btn-info"
+        :disabled="TravelougeUploadLoading"
+        @click="uploadTravelogue">
+        {{ TravelougeUploadLoading
+            ? $t('m.message.uploading')
+            : $t('m.travelogue.new.upload_travelogue') }}
+      </button>
+
+      <button
+        v-if="travelogueModel.markdownResource"
         slot="box-action"
         style="margin-right:10px;"
         class="btn btn-warning"
+        :disabled="JPEGdownloadLoading"
         @click="download('JPEG')">
-        {{ $t('m.travelogue.new.download_jpeg') }}
+        {{ JPEGdownloadLoading
+            ? $t('m.message.downloading')
+            : $t('m.travelogue.new.download_jpeg') }}
       </button>
 
       <button
-        v-if="markdownResource"
+        v-if="travelogueModel.markdownResource"
         slot="box-action"
         style="margin-right:10px;"
         class="btn btn-inverse"
+        :disabled="PDFdownloadLoading"
         @click="download('PDF')">
-        {{ $t('m.travelogue.new.download_pdf') }}
+        {{ PDFdownloadLoading
+            ? $t('m.message.downloading')
+            : $t('m.travelogue.new.download_pdf') }}
       </button>
 
       <button
-        v-if="markdownResource"
+        v-if="travelogueModel.markdownResource"
         slot="box-action"
-        class="btn btn-danger fui-link"
+        class="btn btn-danger fui-plus"
         @click="$refs.shareModal.open()"
       >
       </button>
@@ -99,6 +127,13 @@
         </div>
       </social-sharing>
     </sweet-modal>
+
+    <sweet-modal
+      ref="uploadTravelogueSuccessful"
+      icon="success"
+    >
+      {{ $t('m.message.success') }}
+    </sweet-modal>
   </div>
 </template>
 
@@ -111,6 +146,7 @@ import JsPDF from 'jspdf'
 import { SweetModal } from 'sweet-modal-vue'
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+import { setTimeout } from 'timers';
 
 export default {
   name: "travelogue-new",
@@ -137,7 +173,7 @@ export default {
         table: true, // 表格
         fullscreen: false, // 全屏编辑
         readmodel: false, // 沉浸式阅读
-        htmlcode: true, // 展示html源码
+        htmlcode: false, // 展示html源码
         help: true, // 帮助
         undo: true, // 上一步
         redo: true, // 下一步
@@ -150,7 +186,14 @@ export default {
         subfield: false, // 单双栏模式
         preview: true, // 预览
       },
-      markdownResource: ''
+      TravelougeUploadLoading: false,
+      JPEGdownloadLoading: false,
+      PDFdownloadLoading: false,
+      travelogueModel: {
+        title: '',
+        content: '',
+        markdownResource: ''
+      }
     }
   },
 
@@ -161,18 +204,45 @@ export default {
   },
 
   methods: {
+    $imgAdd(pos, $file) {
+      const formdata = new FormData()
+      formdata.append('image', $file)
+
+      this.$store.dispatch('UPLOAD_IMAGE', {
+        file: formdata
+      }).then(data => {
+        this.$refs.md.$img2Url(pos, data.data.url);
+      })
+    },
     onSave(data) {
       if (data.trim()) {
         // 直接节点克隆导致 canvas 转图片错位
-        this.markdownResource = marked(data)
+        this.travelogueModel.markdownResource = marked(data)
+        this.travelogueModel.content = data
       }
 
       this.$refs.preModal.open()
+    },
+    uploadTravelogue() {
+      this.TravelougeUploadLoading = !this.TravelougeUploadLoading
+        this.$store.dispatch('UPLOAD_TRAVELOGUE', {
+          model: {
+            title: this.travelogueModel.title,
+            content: this.travelogueModel.content
+          }
+        }).then(() => {
+          this.TravelougeUploadLoading = !this.TravelougeUploadLoading
+          this.$refs.uploadTravelogueSuccessful.open()
+        })
     },
     getFilename(type) {
       return 'travelogue_' + (new Date()).getTime() + '.' + type
     },
     download(type) {
+      type === 'JPEG'
+        ? this.JPEGdownloadLoading = true
+        : this.PDFdownloadLoading = true
+
       let pdfDom = document.querySelector('.html-pre__content')
 
       html2canvas(pdfDom, {
@@ -192,6 +262,7 @@ export default {
           img.href = canvas.toDataURL('image/jpeg').replace("image/jpeg", "image/octet-stream")
           img.download = this.getFilename('jpg')
           img.click()
+          this.JPEGdownloadLoading = false
         }
 
         if (type === 'PDF') {
@@ -209,12 +280,12 @@ export default {
               if (leftHeight > 0) {
                 PDF.addPage()
               }
-
             }
           }
 
           let filename = this.getFilename('pdf')
           PDF.save(filename)
+          this.PDFdownloadLoading = false
         }
       })
     }
@@ -229,7 +300,10 @@ export default {
 .travelogue-new {
   overflow: auto;
   .editor {
-    height: 480px;
+    height: 438px;
+    &-title {
+      margin-bottom: 6px;
+    }
     &-item {
       height: 100%;
       z-index: 1;

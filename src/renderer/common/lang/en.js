@@ -40,7 +40,9 @@ export const m = {
   // travelogue
   travelogue: {
     new: {
+      title: 'Travelogue title',
       placeholder: 'Starting a new travelogue...',
+      upload_travelogue: 'Upload to cloud',
       download_pdf: 'PDF',
       download_jpeg: 'JPEG',
       pre_empty: 'Whoops, there is nothing here...',
@@ -93,7 +95,10 @@ export const m = {
     account_exceeded_avatar: 'Image size exceeds limits',
     welcome: 'Welcome to iMap, if you want to know more, please move to the help documentation',
     loading: 'Loading...',
-    updating: 'Updating...'
+    updating: 'Updating...',
+    uploading: 'Uploading...',
+    downloading: 'Downloading...',
+    success: 'Success'
   },
 
   // share

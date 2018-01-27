@@ -17,7 +17,8 @@ export default {
         url: obj.url,
         data: obj.data,
         headers: {
-          'Accept-Language': storage.get('LANG') || 'zh-CN'
+          'Accept-Language': storage.get('LANG') || 'zh-CN',
+          'Authorization': Cookies.get('ACCESSTOKEN')
         }
       }).then(data => {
         Message.success(data.data.msg)
@@ -39,7 +40,8 @@ export default {
         url: obj.url,
         params: obj.data,
         headers: {
-          'Accept-Language': storage.get('LANG') || 'zh-CN'
+          'Accept-Language': storage.get('LANG') || 'zh-CN',
+          'Authorization': Cookies.get('ACCESSTOKEN')
         }
       }).then(data => {
         Message.success(data.data.msg)

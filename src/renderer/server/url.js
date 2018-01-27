@@ -6,6 +6,8 @@ export default {
   PHONELOGIN       : '/api/v1/auth/login/phone',
   RESET            : '/v1/reset',
   USER             : '/v1/user',
+  UPLOAD_IMAGE     : '/v1/upload/image',
+  UPLOAD_TRAVELOGUE: '/v1/travelogue',
   RESOLVEEXCEL     : '/api/v1/resolveExcel',
   ASYNC_UPLOAD     : '/api/v1/async/upload',
   ASYNC_DOWNLOAD   : '/api/v1/async/download',

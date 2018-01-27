@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="register-container" @keydown.enter="register">
     <div class="form-group has-feedback animated fadeInDown">
-      <input class="form-control" type="text" v-model="model.username" :placeholder="$t('m.register.input_username')">
+      <input class="form-control" type="text" v-model="model.nickname" :placeholder="$t('m.register.input_username')">
       <span class="form-control-feedback fui-user"></span>
     </div>
 
@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       model: {
-        username: '',
+        nickname: '',
         email: '',
         re_password: '',
         password: ''
@@ -53,7 +53,7 @@ export default {
       this.$router.push({ path: '/auth/login' })
     },
     register() {
-      if (!this.model.username) {
+      if (!this.model.nickname) {
         this.$Message.warning(this.$i18n.messages[this.$i18n.locale].m.message.register_username)
       } else if (!tool.judgeEmail(this.model.email)) {
         this.$Message.warning(this.$i18n.messages[this.$i18n.locale].m.message.register_email)

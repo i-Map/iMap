@@ -9,7 +9,7 @@ export default {
   },
 
   SET_USER: (state, { user, accessToken, oauth }) => {
-    if (accessToken && oauth) {
+    if (accessToken) {
       state.OAUTH = oauth
 
       Cookies.set('ACCESSTOKEN', accessToken, {

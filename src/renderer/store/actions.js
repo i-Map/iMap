@@ -8,15 +8,15 @@ export default {
 
 	LOGIN: ({ commit, dispatch }, { model }) => {
 		return ajax.post({
-		url: url.LOGIN,
-		data: model
-		}).then(data => {
+			url: url.LOGIN,
+			data: model
+			}).then(data => {
 				commit('SET_USER', {
 					user: data.data.user,
 					accessToken: data.data.accessToken,
 					oauth: data.data.oauth
 				})
-		})
+			})
 	},
 
 	LOGIN_GITHUB: ({ commit, dispatch }, { code }) => {
@@ -59,6 +59,23 @@ export default {
 			commit('SET_USER', {
 				user: data.data
 			})
+		})
+	},
+
+	UPLOAD_IMAGE: ({ commit, dispatch }, { file }) => {
+		return ajax.post({
+			url: url.UPLOAD_IMAGE,
+			data: file,
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			}
+		})
+	},
+
+	UPLOAD_TRAVELOGUE: ({ commit, dispatch }, { model }) => {
+		return ajax.post({
+			url: url.UPLOAD_TRAVELOGUE,
+			data: model
 		})
 	},
 

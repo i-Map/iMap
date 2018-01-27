@@ -40,7 +40,9 @@ export const m = {
   // travelogue
   travelogue: {
     new: {
+      title: '游记标题',
       placeholder: '开启新的篇章...',
+      upload_travelogue: '上传云端',
       download_pdf: 'PDF',
       download_jpeg: 'JPEG',
       pre_empty: '啊哦，这儿什么都没有...',
@@ -93,7 +95,10 @@ export const m = {
     account_exceeded_avatar: '图片大小超出限制',
     welcome: '欢迎您使用 iMap , 想进一步了解 iMap 请移步帮助文档',
     loading: '加载中...',
-    updating: '更新中...'
+    updating: '更新中...',
+    uploading: '上传中...',
+    downloading: '下载中...',
+    success: '成功'
   },
 
   // share
