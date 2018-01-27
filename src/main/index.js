@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, shell } from 'electron'
 
 /**
  * Set `__static` path to static files in production
@@ -27,6 +27,14 @@ function createWindow () {
     fullscreenable: false,
     backgroundColor: '#59BBA5'
   })
+
+  function urlChecker(event, url) {
+    event.preventDefault()
+    if (url.match('localhost' || 'github') === null) shell.openExternal(url)
+    else mainWindow.loadURL(url)
+  }
+  mainWindow.webContents.on('will-navigate', urlChecker)
+  mainWindow.webContents.on('new-window', urlChecker)
 
   mainWindow.loadURL(winURL)
 

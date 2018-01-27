@@ -45,4 +45,12 @@
     transform: none;
   }
 }
+
+ol {
+  list-style-type: decimal;
+}
+
+ul > li {
+  list-style: disc;
+}
 </style>

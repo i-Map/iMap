@@ -9,15 +9,17 @@ export default {
   },
 
   SET_USER: (state, { user, accessToken, oauth }) => {
-    state.USER = user
-    state.OAUTH = oauth
+    if (accessToken && oauth) {
+      state.OAUTH = oauth
 
-    Cookies.set('ACCESSTOKEN', accessToken, {
-      expires: 1,
-      secure: false
-    }),
+      Cookies.set('ACCESSTOKEN', accessToken, {
+        expires: 1,
+        secure: false
+      }),
+      storage.set('OAUTH', oauth)
+    }
+    state.USER = user
     storage.set('USER', user)
-    storage.set('OAUTH', oauth)
   },
 
   REMOVE_USER: (state) => {

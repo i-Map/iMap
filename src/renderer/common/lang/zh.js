@@ -37,9 +37,19 @@ export const m = {
     write_travelogue: '撰写游记'
   },
 
+  // travelogue
+  travelogue: {
+    new: {
+      placeholder: '开启新的篇章...'
+    }
+  },
+
   // Account.vue
   account: {
     change_avatar: '更换头像',
+    avatar_des: 'jpeg，png，gif 格式，大小限制为 1 M',
+    nickname_edit: '请先更改昵称',
+    nickname_edit_error: '昵称不符合要求',
     tool_box: {
       basic_setting: '基础设置',
       map_config: '地图配置',
@@ -54,7 +64,7 @@ export const m = {
       update_password_title: '更新密码',
       update_password: '发送重置邮件',
       submit: '提交',
-      switch_language: '切换语言'
+      switch_language: '切换语言',
     },
     about: {
       check_update: '检查更新',
@@ -75,7 +85,9 @@ export const m = {
     reset_email: '请输入正确的邮箱地址',
     account_email: '请输入正确的邮箱地址',
     account_reemail: '两次邮箱地址须一致',
+    account_exceeded_avatar: '图片大小超出限制',
     welcome: '欢迎您使用 iMap , 想进一步了解 iMap 请移步帮助文档',
-    loading: '加载中...'
+    loading: '加载中...',
+    updating: '更新中...'
   }
 }

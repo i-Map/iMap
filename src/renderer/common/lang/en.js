@@ -37,13 +37,23 @@ export const m = {
     write_travelogue: 'WRITE TRAVELOGUE'
   },
 
+  // travelogue
+  travelogue: {
+    new: {
+      placeholder: 'Starting a new travelogue...'
+    }
+  },
+
   // Account.vue
   account: {
     change_avatar: 'Change avatar',
+    avatar_des: 'jpeg, png, gif format, size limit 1 M',
+    nickname_edit: 'Please edit nickname first',
+    nickname_edit_error: 'Nickname is out of rule',
     tool_box: {
       basic_setting: 'Basic',
       map_config: 'Map',
-      travelogue_config: 'Travelogue',
+      travelogue_config: 'Travetravelogue',
       about: 'About'
     },
     basic_setting: {
@@ -54,7 +64,7 @@ export const m = {
       update_password_title: 'Update password',
       update_password: 'Send reset email',
       submit: 'Submit',
-      switch_language: 'Switch language'
+      switch_language: 'Switch language',
     },
     about: {
       check_update: 'Check update',
@@ -75,7 +85,9 @@ export const m = {
     reset_email: 'Please use correct email address',
     account_email: 'Please use correct email address',
     account_reemail: 'Twice email should be the same',
+    account_exceeded_avatar: 'Image size exceeds limits',
     welcome: 'Welcome to iMap, if you want to know more, please move to the help documentation',
-    loading: 'Loading...'
+    loading: 'Loading...',
+    updating: 'Updating...'
   }
 }

@@ -1,15 +1,26 @@
 <template lang="html">
   <div class="reset-container" @keydown.enter="reset">
     <div class="form-group has-feedback animated fadeInDown">
-      <input class="form-control" type="text" v-model="model.email" :placeholder="$t('m.reset.input_email')">
+      <input
+        class="form-control"
+        type="text"
+        v-model="model.email"
+        :placeholder="$t('m.reset.input_email')"
+      >
       <span class="form-control-feedback fui-mail"></span>
     </div>
 
-    <button class="form-group btn btn-info animated fadeInDown" @click="reset">
+    <button
+      class="form-group btn btn-info animated fadeInDown"
+      @click="reset"
+    >
       {{ $t("m.reset.submit") }}
     </button>
 
-    <a class="link animated fadeInDown" @click="goLogin">
+    <a
+      class="link animated fadeInDown"
+      @click="goLogin"
+    >
       {{ $t("m.reset.login") }}
     </a>
   </div>

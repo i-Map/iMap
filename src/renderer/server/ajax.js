@@ -1,5 +1,6 @@
 import axios from 'axios'
 import storage from 'store'
+import * as Cookies from 'js-cookie'
 import { Message, Spin } from 'iview'
 axios.defaults.timeout = 1000000; //响应时间
 axios.defaults.headers.post['Content-Type'] = 'application/json' //通信格式
@@ -29,6 +30,7 @@ export default {
       })
     })
   },
+
   // GET 请求
   get({...obj}) {
     return new Promise((resolve,reject) => {
@@ -49,5 +51,28 @@ export default {
         reject(error)
       })
     })
-  }
+  },
+
+  // PATCH 请求
+  patch({...obj}) {
+    return new Promise((resolve,reject) => {
+      axios({
+        method: 'patch',
+        url: obj.url,
+        data: obj.data,
+        headers: {
+          'Accept-Language': storage.get('LANG') || 'zh-CN',
+          'Authorization': Cookies.get('ACCESSTOKEN')
+        }
+      }).then(data => {
+        Message.success(data.data.msg)
+        Spin.hide()
+        resolve(data.data)
+      }).catch(error => {
+        Message.error(error.response.data.msg)
+        Spin.hide()
+        reject(error)
+      })
+    })
+  },
 }

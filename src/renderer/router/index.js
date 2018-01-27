@@ -28,6 +28,17 @@ const router = new Router({
               component: resolve => require(['@/components/Page/Map/Make'], resolve)
             }
           ]
+        }, {
+          path: '/travelogue',
+          name: 'Travelogue',
+          component: resolve => require(['@/components/Page/Travelogue'], resolve),
+          children: [
+            {
+              path: '/travelogue/new',
+              name: 'travelogue-new',
+              component: resolve => require(['@/components/Page/Travelogue/New'], resolve)
+            }
+          ]
         }
       ]
     }, {
