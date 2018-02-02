@@ -6,8 +6,8 @@
 
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li :class="activeItem === '/' || activeItem === '/map/write' ? 'active' : ''">
-          <a href="#fakelink">{{ $t('m.header.make_map') }}</a>
+        <li :class="activeItem === '/map/make' ? 'active' : ''">
+          <router-link to="/map/make">{{ $t('m.header.make_map') }}</router-link>
         </li>
 
         <li :class="activeItem === '/travelogue/new' ? 'active' : ''">

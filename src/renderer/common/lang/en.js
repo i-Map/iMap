@@ -41,6 +41,7 @@ export const m = {
   travelogue: {
     new: {
       title: 'Travelogue title',
+      title_empty: 'Please input the title',
       placeholder: 'Starting a new travelogue...',
       upload_travelogue: 'Upload to cloud',
       download_pdf: 'PDF',

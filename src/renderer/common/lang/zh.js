@@ -41,6 +41,7 @@ export const m = {
   travelogue: {
     new: {
       title: '游记标题',
+      title_empty: '请输入标题',
       placeholder: '开启新的篇章...',
       upload_travelogue: '上传云端',
       download_pdf: 'PDF',

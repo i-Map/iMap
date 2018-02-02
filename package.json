@@ -22,6 +22,8 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
+    "echarts": "^4.0.2",
+    "echarts-gl": "^1.0.1",
     "html2canvas": "^1.0.0-alpha.9",
     "iview": "^2.4.0",
     "jade": "^1.11.0",

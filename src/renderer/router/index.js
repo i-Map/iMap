@@ -24,7 +24,7 @@ const router = new Router({
           children: [
             {
               path: '/map/make',
-              name: 'Map-make',
+              name: 'map-make',
               component: resolve => require(['@/components/Page/Map/Make'], resolve)
             }
           ]

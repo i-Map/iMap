@@ -224,7 +224,12 @@ export default {
       this.$refs.preModal.open()
     },
     uploadTravelogue() {
-      this.TravelougeUploadLoading = !this.TravelougeUploadLoading
+      if (!this.travelogueModel.title.trim() || !this.travelogueModel.content.trim()) {
+        this.$refs.preModal.close()
+        this.$Message.warning(this.$i18n.messages[this.$i18n.locale].m.travelogue.new.title_empty)
+      } else {
+        this.TravelougeUploadLoading = !this.TravelougeUploadLoading
+
         this.$store.dispatch('UPLOAD_TRAVELOGUE', {
           model: {
             title: this.travelogueModel.title,
@@ -234,6 +239,7 @@ export default {
           this.TravelougeUploadLoading = !this.TravelougeUploadLoading
           this.$refs.uploadTravelogueSuccessful.open()
         })
+      }
     },
     getFilename(type) {
       return 'travelogue_' + (new Date()).getTime() + '.' + type
