@@ -18,6 +18,7 @@ function createWindow () {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
+    show: false,
     height: 563,
     useContentSize: true,
     width: 1000,
@@ -27,6 +28,11 @@ function createWindow () {
   })
 
   mainWindow.loadURL(winURL)
+
+  mainWindow.on('ready-to-show', function() {
+    mainWindow.show();
+    mainWindow.focus();
+  });
 
   mainWindow.on('closed', () => {
     mainWindow = null
